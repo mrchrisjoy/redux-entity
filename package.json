@@ -1,0 +1,22 @@
+{
+  "name": "@foundcareers/redux-entity",
+  "version": "1.0.0",
+  "description": "Entity lib for redux state",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foundcareers/redux-entity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/foundcareers/redux-entity/issues"
+  },
+  "homepage": "https://github.com/foundcareers/redux-entity#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
