@@ -15,7 +15,7 @@ import {
   createInitialCollectionState,
 } from './entity-collection-factory';
 
-export default {
+export {
   addEntity,
   addEntities,
   removeEntity,
