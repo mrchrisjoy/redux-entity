@@ -1,5 +1,5 @@
-import * as entityReducer from './entity-reducer';
-import {createInitialCollectionState} from './entity-collection-factory';
+import * as reducer from './reducer';
+import {createInitialCollectionState} from './factory';
 
 const initialState = createInitialCollectionState({
   entities: {
@@ -12,12 +12,12 @@ const initialState = createInitialCollectionState({
   selectedEntityId: '1',
 });
 
-describe('Testing entityReducer', () => {
+describe('Testing reducer', () => {
   describe('addEntity', () => {
     it('should add new entity', () => {
       const payload = {id: '6'};
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.addEntity(prevState, payload);
+      const finalState = reducer.addEntity(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(5);
       expect(prevState.entities['6']).not.toBeDefined();
       expect(Object.keys(finalState.entities).length).toEqual(6);
@@ -28,7 +28,7 @@ describe('Testing entityReducer', () => {
     it('should update existing entity', () => {
       const payload = {id: '3', data: 'some thing'};
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.addEntity(prevState, payload);
+      const finalState = reducer.addEntity(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(5);
       expect(Object.keys(finalState.entities).length).toEqual(5);
       expect(finalState.entities['3'].data).toBeDefined();
@@ -37,7 +37,7 @@ describe('Testing entityReducer', () => {
     it('should add new entities to empty initial state', () => {
       const payload = {id: '6'};
       const prevState = createInitialCollectionState();
-      const finalState = entityReducer.addEntity(prevState, payload);
+      const finalState = reducer.addEntity(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(0);
       expect(Object.keys(finalState.entities).length).toEqual(1);
     });
@@ -47,7 +47,7 @@ describe('Testing entityReducer', () => {
     it('should add new set of entities', () => {
       const payload = {'6': {id: '6'}, '7': {id: '7'}};
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.addEntities(prevState, payload);
+      const finalState = reducer.addEntities(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(5);
       expect(Object.keys(finalState.entities).length).toEqual(7);
       expect(finalState.entities['6'].id).toEqual('6');
@@ -60,7 +60,7 @@ describe('Testing entityReducer', () => {
         '5': {id: '5', data: 'bye'},
       };
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.addEntities(prevState, payload);
+      const finalState = reducer.addEntities(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(5);
       expect(Object.keys(finalState.entities).length).toEqual(5);
       expect(finalState.entities['1'].data).toBeDefined();
@@ -70,7 +70,7 @@ describe('Testing entityReducer', () => {
     it('should add new entities to empty initial state', () => {
       const payload = {'1': {id: '1'}, '2': {id: '2'}, '3': {id: '3'}};
       const prevState = createInitialCollectionState();
-      const finalState = entityReducer.addEntities(prevState, payload);
+      const finalState = reducer.addEntities(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(0);
       expect(Object.keys(finalState.entities).length).toEqual(3);
     });
@@ -80,7 +80,7 @@ describe('Testing entityReducer', () => {
     it('should remove an entity', () => {
       const payload = '1';
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.removeEntity(prevState, payload);
+      const finalState = reducer.removeEntity(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(5);
       expect(Object.keys(finalState.entities).length).toEqual(4);
       expect(finalState.entities['1']).toBeUndefined();      
@@ -89,7 +89,7 @@ describe('Testing entityReducer', () => {
     it('shouldn\'t remove an entity', () => {
       const payload = '7';
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.removeEntity(prevState, payload);
+      const finalState = reducer.removeEntity(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(5);
       expect(Object.keys(finalState.entities).length).toEqual(5);
     });
@@ -99,7 +99,7 @@ describe('Testing entityReducer', () => {
     it('should remove entities', () => {
       const payload = ['1', '2', '3'];
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.removeEntities(prevState, payload);
+      const finalState = reducer.removeEntities(prevState, payload);
       expect(Object.keys(prevState.entities).length).toBe(5);
       expect(Object.keys(finalState.entities).length).toBe(2);
       expect(finalState.entities['1']).toBeUndefined();
@@ -110,7 +110,7 @@ describe('Testing entityReducer', () => {
     it('shouldn\'t remove entities', () => {
       const payload = ['6', '7', '8'];
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.removeEntities(prevState, payload);
+      const finalState = reducer.removeEntities(prevState, payload);
       expect(Object.keys(prevState.entities).length).toBe(5);
       expect(Object.keys(finalState.entities).length).toBe(5);
     });
@@ -119,7 +119,7 @@ describe('Testing entityReducer', () => {
   describe('removeSelectedEntity', () => {
     it('should remove selected entity', () => {
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.removeSelectedEntity(prevState);
+      const finalState = reducer.removeSelectedEntity(prevState);
       expect(prevState.selectedEntityId).toBe('1');
       expect(finalState.selectedEntityId).toBeNull();  
     });
@@ -135,7 +135,7 @@ describe('Testing entityReducer', () => {
         totalCount: 3,
       };
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.addMeta(prevState, payload);
+      const finalState = reducer.addMeta(prevState, payload);
       expect(prevState.meta).toMatchObject({});
       expect(finalState.meta).toMatchObject(payload);
     });
@@ -152,7 +152,7 @@ describe('Testing entityReducer', () => {
       };
       const parentId = '1';
       const prevState = Object.assign({}, initialState)
-      const finalState = entityReducer.addNestedMeta(prevState, parentId, payload);
+      const finalState = reducer.addNestedMeta(prevState, parentId, payload);
       expect(prevState.meta).toMatchObject({});
       expect(finalState.meta[parentId]).toMatchObject(payload);
     });
@@ -162,7 +162,7 @@ describe('Testing entityReducer', () => {
     it('should change selected entity', () => {
       const payload = '2';
       const prevState = Object.assign({}, initialState);
-      const finalState = entityReducer.select(prevState, payload);
+      const finalState = reducer.select(prevState, payload);
       expect(prevState.selectedEntityId).toBe('1');
       expect(finalState.selectedEntityId).toEqual(payload);
     });
@@ -172,7 +172,7 @@ describe('Testing entityReducer', () => {
     it('should reset state to prevState', () => {
       const prevState = Object.assign({}, initialState);
       const emptyInitialState = createInitialCollectionState();
-      const finalState = entityReducer.reset(prevState, emptyInitialState);
+      const finalState = reducer.reset(prevState, emptyInitialState);
       expect(prevState.selectedEntityId).toEqual('1');
       expect(Object.keys(prevState.entities).length).toEqual(5);
       expect(finalState.selectedEntityId).toBeNull();

@@ -1,13 +1,9 @@
-import {
-  createInitialMetaData,
-  createInitialNestedCollectionState,
-  createInitialCollectionState,
-} from './entity-collection-factory';
+import * as factory from './factory';
 
-describe('Testing entityCollectionFactory', () => {
+describe('Testing factory', () => {
   describe('createInitialMetaData', () => {
     it('should create inital meta object', () => {
-      const initialMetaData = createInitialMetaData();
+      const initialMetaData = factory.createInitialMetaData();
       expect(Object.keys(initialMetaData).length).toEqual(5);
       expect(initialMetaData.currentPage).toEqual(0);
       expect(initialMetaData.nextPage).toEqual(0);
@@ -19,7 +15,7 @@ describe('Testing entityCollectionFactory', () => {
 
   describe('createInitialNestedCollectionState', () => {
     it('should create inital nested collection state', () => {
-      const initialNestedCollectionState = createInitialNestedCollectionState();
+      const initialNestedCollectionState = factory.createInitialNestedCollectionState();
       expect(Object.keys(initialNestedCollectionState).length).toEqual(4);
       expect(typeof initialNestedCollectionState.entities).toBe('object');
       expect(typeof initialNestedCollectionState.meta).toBe('object');
@@ -30,7 +26,7 @@ describe('Testing entityCollectionFactory', () => {
 
   describe('createInitialCollectionState', () => {
     it('should create inital collection state', () => {
-      const initialCollectionState = createInitialCollectionState();
+      const initialCollectionState = factory.createInitialCollectionState();
       const initialMetaData = createInitialMetaData();
       expect(Object.keys(initialCollectionState).length).toEqual(3);
       expect(initialCollectionState.meta).toMatchObject(initialMetaData);
