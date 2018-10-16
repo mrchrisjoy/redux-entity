@@ -2,7 +2,7 @@ import * as factory from './factory';
 
 describe('Testing factory', () => {
   describe('createInitialMetaData', () => {
-    it('should create inital meta object', () => {
+    it('should create initial meta object', () => {
       const initialMetaData = factory.createInitialMetaData();
       expect(Object.keys(initialMetaData).length).toEqual(5);
       expect(initialMetaData.currentPage).toEqual(0);
@@ -14,7 +14,7 @@ describe('Testing factory', () => {
   });
 
   describe('createInitialNestedCollectionState', () => {
-    it('should create inital nested collection state', () => {
+    it('should create initial nested collection state', () => {
       const initialNestedCollectionState = factory.createInitialNestedCollectionState();
       expect(Object.keys(initialNestedCollectionState).length).toEqual(4);
       expect(typeof initialNestedCollectionState.entities).toBe('object');
@@ -25,9 +25,9 @@ describe('Testing factory', () => {
   });
 
   describe('createInitialCollectionState', () => {
-    it('should create inital collection state', () => {
+    it('should create initial collection state', () => {
       const initialCollectionState = factory.createInitialCollectionState();
-      const initialMetaData = createInitialMetaData();
+      const initialMetaData = factory.createInitialMetaData();
       expect(Object.keys(initialCollectionState).length).toEqual(3);
       expect(initialCollectionState.meta).toMatchObject(initialMetaData);
       expect(initialCollectionState.selectedEntityId).toBeNull();
