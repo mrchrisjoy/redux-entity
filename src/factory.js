@@ -1,10 +1,21 @@
-export const createInitialMetaData = params => {
+const initialCursorMeta = {
+  endCursor: null,
+  hasNextPage: null,
+  startCursor: null
+};
+
+const initialPaginationMeta = {
+  currentPage: 0,
+  nextPage: 0,
+  prevPage: null,
+  totalPages: 0,
+  totalCount: 0,
+}
+
+export const createInitialMetaData = (params, useCursor=false) => {
+  const meta = useCursor ? initialCursorMeta : initialPaginationMeta;
   return {
-    currentPage: 0,
-    nextPage: 0,
-    prevPage: null,
-    totalPages: 0,
-    totalCount: 0,
+   ...meta,
     ...params
   };
 };
