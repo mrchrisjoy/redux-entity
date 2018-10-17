@@ -25,17 +25,6 @@ describe('Testing factory', () => {
     });
   });
 
-  describe('createInitialNestedCollectionState', () => {
-    it('should create initial nested collection state', () => {
-      const initialNestedCollectionState = factory.createInitialNestedCollectionState();
-      expect(Object.keys(initialNestedCollectionState).length).toEqual(4);
-      expect(typeof initialNestedCollectionState.entities).toBe('object');
-      expect(typeof initialNestedCollectionState.meta).toBe('object');
-      expect(initialNestedCollectionState.selectedParentEntityId).toBeNull();
-      expect(initialNestedCollectionState.selectedEntityId).toBeNull();
-    });
-  });
-
   describe('createInitialCollectionState', () => {
     it('should create initial collection state', () => {
       const initialCollectionState = factory.createInitialCollectionState();

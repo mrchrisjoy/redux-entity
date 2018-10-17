@@ -1,9 +1,9 @@
 # @foundcareers/redux-entity
-This library is contains a collection of helper methods to help manage entities in a redux store. 
+This library contains a bunch of helpers to manage entity collections in a redux store. 
 ## Installation 
-Install using npm: 
+Install via npm: 
 ```npm i -s @foundcareers/redux-entity``` \
-Install using yarn: 
+Install via yarn: 
 ```yarn add @foundcareers/redux-entity```
 ## Design Considerations
 - Please ensure all entities have unique Ids.
@@ -62,17 +62,18 @@ Here's an example store that `@foundcareers/redux-entity` can work with:
 
 ## Factory Helpers
 ### createInitialMetaData
-Takes in an object (optional) containing additional meta data, allowing you to expand the default meta object.
+Takes in a meta object with a boolean (optional).
 
-Returns the default initial meta state, containing page details etc.
+Returns the pagination meta if the second parameter hasn't been specified or set to `false`. If the second parameter is set to `true`, it returns an initial cursor meta object.
 
 Example Usage:
 ```
 import {createInitialMetaData} from '@foundcareers/redux-entity';
 
-const meta = createInitialMetaData({author: 'Bob Cutlass'});
+const paginationMeta = createInitialMetaData({author: 'Bob Cutlass'});
+const cursorMeta = createInitialMetaData({}, true);
 ```
-Resulting in the following meta object:
+Resulting in the following `paginatedMeta` object:
 ```
 {
   currentPage: 0,
@@ -83,22 +84,14 @@ Resulting in the following meta object:
   author: 'Bob Cutlass'
  }
 ```
-
-### createInitialNestedCollectionState
-Takes in an object used to extend the initial nested collection object.  
-
-Returns a nested entity state object.
-
-Example Usage:
+and the following `cursorMeta` object:
 ```
-import {createInitialNestedCollectionState} from '@foundcareers/redux-entity';
-
-const nestedState = {
-  todo: createInitialNestedCollectionState(),
-  users: createInitialNestedCollectionState()  
-};
+{
+  endCursor: null,
+  hasNextPage: null,
+  startCursor: null
+ }
 ```
-
 
 ### createInitialCollectionState
 Takes in a state object (optional), allowing you to expand the initial state.
@@ -184,10 +177,6 @@ Returns a new collection object with `selectedEntityId` set to `null`.
 Takes in a collection object and a meta object.
 
 Returns a new collection object containing the meta object.
-### addNestedMeta
-Takes in a collection object, `parentId` and a meta object as the payload.
-
-Returns a new collection object with a nested meta object.
 ### select
 Takes in a collection object and a entity id as the payload.
 

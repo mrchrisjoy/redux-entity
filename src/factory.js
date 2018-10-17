@@ -20,16 +20,6 @@ export const createInitialMetaData = (params, useCursor=false) => {
   };
 };
 
-export const createInitialNestedCollectionState = params => {
-  return {
-    entities: {},
-    meta: {},
-    selectedParentEntityId: null,
-    selectedEntityId: null,
-    ...params
-  };
-};
-
 export const createInitialCollectionState = params => {
   return {
     entities: {},
