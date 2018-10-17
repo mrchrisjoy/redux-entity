@@ -33,7 +33,6 @@ Here's an example store that `@foundcareers/redux-entity` can work with:
       totalPages: 4,
       totalCount: 12,
     },
-    selectedParentEntityId: null,
     selectedEntityId: 'be9a-a245gf2033a20',
   },
   users: {
@@ -54,7 +53,6 @@ Here's an example store that `@foundcareers/redux-entity` can work with:
       totalPages: 2,
       totalCount: 3,
     },
-    selectedParentEntityId: null,
     selectedEntityId: 'ke9a-a245gf2033a22',
   },
 }
