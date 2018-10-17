@@ -168,7 +168,7 @@ Takes in a collection object and an array of entity ids as the payload.
 
 Returns a new collection object without the entities you've specified to remove.
 ### removeSelectedEntity
-Take in a collection object.
+Takes in a collection object.
 
 Returns a new collection object with `selectedEntityId` set to `null`.
 ### addMeta
@@ -245,8 +245,8 @@ Resulting in the following `entities` array:
 ### getSelectedEntityId
 Takes in a collection object and returns the selected entity (ie. return `state.selectedEntityId`).
 ### getMeta
-Takes in a collection object and returns the meta.
+Takes in a collection object and returns its meta.
 ### getNextPage
-Takes in a collection object and returns the next page located in the meta.
+Takes in a collection object and returns the next page based on the meta.
 ### getPrevPage
-Takes in a collection object and returns the previous page located in the meta.
+Takes in a collection object and returns the previous page based on the meta.
