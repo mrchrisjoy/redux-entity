@@ -220,7 +220,6 @@ const todoState = {
     totalPages: 4,
     totalCount: 12,
   },
-  selectedParentEntityId: null,
   selectedEntityId: 'be9a-a245gf2033a20',
 };
 
