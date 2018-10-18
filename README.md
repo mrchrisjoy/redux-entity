@@ -8,7 +8,7 @@ Install via yarn:
 ## Design Considerations
 - Please ensure all entities have unique Ids.
 
-Here's an example store that `@foundcareers/redux-entity` can work with:
+Here's an example store that `@foundcareers/redux-entity` can work with, with the following collections: `todos` and `users`.
 ```
 {
   todos: {
@@ -183,14 +183,15 @@ Return a new collection object with the specified entity id selected (ie. set `s
 Takes in an existing collection object and an initial collection object.
 
 Returns a new collection object with the existing state replaced with the initial collection object.
+
 ## Selector Helpers
-The following entity selector functions return particular 
+
 ### getEntities
 Takes in a collection object and returns the entities object (ie. `state.entities`).
 ### getEntitiesArray
-Takes in a collection object, and a comparison function (optional) used to sort the entities.
+Takes in a collection object, and a comparison function (optional), used when sorting the array.
 
-Returns a sorted array of entity objects. If no comparison function is specified it returns an unsorted array of entitiy objects.
+Returns a sorted array of entities, otherwise if no comparison function is specified it returns an unsorted array of entities.
 
 Example usage:
 ```
@@ -243,7 +244,7 @@ Resulting in the following `entities` array:
 ]
 ```
 ### getSelectedEntityId
-Takes in a collection object and returns the selected entity (ie. return `state.selectedEntityId`).
+Takes in a collection object and returns the selected entity.
 ### getMeta
 Takes in a collection object and returns its meta.
 ### getNextPage
