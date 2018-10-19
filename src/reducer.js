@@ -29,11 +29,6 @@ export function addMeta (state, payload) {
   return {...state, meta: {...payload}};
 }
 
-export function addNestedMeta (state, parentId, payload) {
-  const meta = Object.assign({}, state.meta, {[parentId]: payload})
-  return {...state, meta};
-}
-
 export function select (state, payload) {
   return {...state, selectedEntityId: payload};
 }

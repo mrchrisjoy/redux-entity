@@ -1,20 +1,21 @@
-export const createInitialMetaData = params => {
-  return {
-    currentPage: 0,
-    nextPage: 0,
-    prevPage: null,
-    totalPages: 0,
-    totalCount: 0,
-    ...params
-  };
+const initialCursorMeta = {
+  endCursor: null,
+  hasNextPage: null,
+  startCursor: null
 };
 
-export const createInitialNestedCollectionState = params => {
+const initialPaginationMeta = {
+  currentPage: 0,
+  nextPage: 0,
+  prevPage: null,
+  totalPages: 0,
+  totalCount: 0,
+}
+
+export const createInitialMetaData = (params, useCursor=false) => {
+  const meta = useCursor ? initialCursorMeta : initialPaginationMeta;
   return {
-    entities: {},
-    meta: {},
-    selectedParentEntityId: null,
-    selectedEntityId: null,
+   ...meta,
     ...params
   };
 };

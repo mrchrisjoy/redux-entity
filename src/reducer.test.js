@@ -141,23 +141,6 @@ describe('Testing reducer', () => {
     });
   });
 
-  describe('addNestedMeta', () => {
-    it('should add nested meta to entity', () => {
-      const payload = {
-        currentPage: 1,
-        nextPage: null,
-        prevPage: null,
-        totalPages: 1,
-        totalCount: 3,
-      };
-      const parentId = '1';
-      const prevState = Object.assign({}, initialState)
-      const finalState = reducer.addNestedMeta(prevState, parentId, payload);
-      expect(prevState.meta).toMatchObject({});
-      expect(finalState.meta[parentId]).toMatchObject(payload);
-    });
-  });
-
   describe('select', () => {
     it('should change selected entity', () => {
       const payload = '2';
