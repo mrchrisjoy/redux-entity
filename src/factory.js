@@ -20,10 +20,10 @@ export const createInitialMetaData = (params, useCursor=false) => {
   };
 };
 
-export const createInitialCollectionState = params => {
+export const createInitialCollectionState = (params, useCursor=false) => {
   return {
     entities: {},
-    meta: createInitialMetaData(),
+    meta: createInitialMetaData({}, useCursor),
     selectedEntityId: null,
     ...params
   };

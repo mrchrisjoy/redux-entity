@@ -11,6 +11,7 @@ describe('Testing factory', () => {
       expect(initialMetaData.totalPages).toEqual(0);
       expect(initialMetaData.totalCount).toEqual(0);
     });
+
     it('should create initial cursor meta object', () => {
       const initialMetaData = factory.createInitialMetaData({}, true);
       expect(Object.keys(initialMetaData).length).toEqual(3);
@@ -26,9 +27,17 @@ describe('Testing factory', () => {
   });
 
   describe('createInitialCollectionState', () => {
-    it('should create initial collection state', () => {
+    it('should create initial collection state, with standard pagination', () => {
       const initialCollectionState = factory.createInitialCollectionState();
       const initialMetaData = factory.createInitialMetaData();
+      expect(Object.keys(initialCollectionState).length).toEqual(3);
+      expect(initialCollectionState.meta).toMatchObject(initialMetaData);
+      expect(initialCollectionState.selectedEntityId).toBeNull();
+    });
+    
+    it('should create initial collection state, with cursor pagination', () => {
+      const initialCollectionState = factory.createInitialCollectionState({}, true);
+      const initialMetaData = factory.createInitialMetaData({}, true);
       expect(Object.keys(initialCollectionState).length).toEqual(3);
       expect(initialCollectionState.meta).toMatchObject(initialMetaData);
       expect(initialCollectionState.selectedEntityId).toBeNull();

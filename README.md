@@ -91,8 +91,9 @@ and the following `cursorMeta` object:
  }
 ```
 
-### createInitialCollectionState
-Takes in a state object (optional), allowing you to expand the initial state.
+### createInitialCollectionState(state, useCursor)
+`state` is an object, allowing you to expand the initial state.
+`useCursor` is a boolean, allowing you to switch between standard and meta pagination. 
 
 Returns an entity state object.
 
@@ -100,12 +101,14 @@ Example Usage:
 ```
 import {createInitialCollectionState} from '@foundcareers/redux-entity';
 
-const state = createInitialCollectionState({
+const stateWithStandardPagination = createInitialCollectionState({
   previouslySelectedEntityId: null,
-});
+}, false);
+const stateWithMetaPagination = createInitialCollectionState({}, true);
 ```
 Resulting in the following collection object:
 ```
+// stateWithStandardPagination
 {
   entities: {},
   meta: {
@@ -114,6 +117,17 @@ Resulting in the following collection object:
     prevPage: null,
     totalPages: 0,
     totalCount: 0
+  },
+  selectedEntityId: null,  
+}
+
+// stateWithMetaPagination
+{
+  entities: {},
+  meta: {
+    endCursor: null,
+    hasNextPage: null,
+    startCursor: null
   },
   selectedEntityId: null,  
 }
