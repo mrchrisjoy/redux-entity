@@ -93,7 +93,7 @@ Resulting in the following initial collection objects:
   selectedEntityId: null,  
 }
 
-// stateWithMetaPagination
+// stateWithCursorPagination
 {
   entities: {},
   meta: {
