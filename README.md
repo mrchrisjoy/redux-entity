@@ -74,10 +74,7 @@ const stateWithStandardPagination = createCollectionState({
 }, false);
 
 const options = {
-  useCursor: true,
-  metaState: {
-    prevPage: null
-  }
+  useCursor: true
 };
 const stateWithMetaPagination = createCollectionState({}, options);
 ```
@@ -103,7 +100,6 @@ Resulting in the following initial collection objects:
     endCursor: null,
     hasNextPage: null,
     startCursor: null,
-    prevPage: null
   },
   selectedEntityId: null,  
 }
