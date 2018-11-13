@@ -1,7 +1,7 @@
 import * as reducer from './reducer';
-import {createInitialCollectionState} from './factory';
+import {createCollectionState} from './factory';
 
-const initialState = createInitialCollectionState({
+const initialState = createCollectionState({
   entities: {
     '1': {id: '1'},
     '2': {id: '2'},
@@ -36,7 +36,7 @@ describe('Testing reducer', () => {
 
     it('should add new entities to empty initial state', () => {
       const payload = {id: '6'};
-      const prevState = createInitialCollectionState();
+      const prevState = createCollectionState();
       const finalState = reducer.addEntity(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(0);
       expect(Object.keys(finalState.entities).length).toEqual(1);
@@ -69,7 +69,7 @@ describe('Testing reducer', () => {
 
     it('should add new entities to empty initial state', () => {
       const payload = {'1': {id: '1'}, '2': {id: '2'}, '3': {id: '3'}};
-      const prevState = createInitialCollectionState();
+      const prevState = createCollectionState();
       const finalState = reducer.addEntities(prevState, payload);
       expect(Object.keys(prevState.entities).length).toEqual(0);
       expect(Object.keys(finalState.entities).length).toEqual(3);
@@ -154,7 +154,7 @@ describe('Testing reducer', () => {
   describe('reset', () => {
     it('should reset state to prevState', () => {
       const prevState = Object.assign({}, initialState);
-      const emptyInitialState = createInitialCollectionState();
+      const emptyInitialState = createCollectionState();
       const finalState = reducer.reset(prevState, emptyInitialState);
       expect(prevState.selectedEntityId).toEqual('1');
       expect(Object.keys(prevState.entities).length).toEqual(5);

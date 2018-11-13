@@ -59,53 +59,28 @@ Here's an example store that `@foundcareers/redux-entity` can work with, with th
 ```
 
 ## Factory Helpers
-### createInitialMetaData
-Takes in a meta object with a boolean (optional).
-
-Returns the pagination meta if the second parameter hasn't been specified or set to `false`. If the second parameter is set to `true`, it returns an initial cursor meta object.
-
-Example Usage:
-```
-import {createInitialMetaData} from '@foundcareers/redux-entity';
-
-const paginationMeta = createInitialMetaData({author: 'Bob Cutlass'});
-const cursorMeta = createInitialMetaData({}, true);
-```
-Resulting in the following `paginatedMeta` object:
-```
-{
-  currentPage: 0,
-  nextPage: 0,
-  prevPage: null,
-  totalPages: 0,
-  totalCount: 0,
-  author: 'Bob Cutlass'
- }
-```
-and the following `cursorMeta` object:
-```
-{
-  endCursor: null,
-  hasNextPage: null,
-  startCursor: null
- }
-```
-
-### createInitialCollectionState
-Takes in a state object (optional), allowing you to expand the initial state.
+### createCollectionState(initialState, options)
+`initialState` is an object, allowing you to expand the default initial state.
+`options` is an object, with the following attributes: `userCursor` (boolean) and `metaState` (object).
 
 Returns an entity state object.
 
 Example Usage:
 ```
-import {createInitialCollectionState} from '@foundcareers/redux-entity';
+import {createCollectionState} from '@foundcareers/redux-entity';
 
-const state = createInitialCollectionState({
+const stateWithStandardPagination = createCollectionState({
   previouslySelectedEntityId: null,
-});
+}, false);
+
+const options = {
+  useCursor: true
+};
+const stateWithMetaPagination = createCollectionState({}, options);
 ```
-Resulting in the following collection object:
+Resulting in the following initial collection objects:
 ```
+// stateWithStandardPagination
 {
   entities: {},
   meta: {
@@ -114,6 +89,17 @@ Resulting in the following collection object:
     prevPage: null,
     totalPages: 0,
     totalCount: 0
+  },
+  selectedEntityId: null,  
+}
+
+// stateWithCursorPagination
+{
+  entities: {},
+  meta: {
+    endCursor: null,
+    hasNextPage: null,
+    startCursor: null,
   },
   selectedEntityId: null,  
 }
@@ -126,7 +112,7 @@ Example usage: `reducers/todo.js`
 import * as reduxEntity from '@foundcareers/redux-entity';
 import * as action from '../actions/todo.js';
 
-const initialState = reduxEntity.createInitialCollectionState();
+const initialState = reduxEntity.createCollectionState();
 
 export const reducer = (state = initialState, {type, payload}) => {
   switch (type) {

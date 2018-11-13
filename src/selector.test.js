@@ -1,7 +1,7 @@
 import * as selector from './selector';
 import * as factory from './factory';
 
-const initialState = factory.createInitialCollectionState({
+const initialState = factory.createCollectionState({
   entities: {
     '1': {id: '1'},
     '2': {id: '2'},
