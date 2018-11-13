@@ -1,0 +1,27 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=e27e8faded291d68834178ae9f69b423ef7429dc3d1b50f9539aea4cc7230eb8
+    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
+
+language: node_js
+
+cache:
+  directories:
+    - ~/.npm
+    - node_modules
+
+notifications:
+  email: false
+
+node_js:
+  - '8'
+
+script:
+  - npm run test --coverage
+
+after_success:
+  - npm run travis-deploy-once "npm run semantic-release"
+
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/

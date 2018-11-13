@@ -1,14 +1,16 @@
 {
   "name": "@foundcareers/redux-entity",
-  "version": "1.4.1",
+  "version": "2.0.0-development",
   "description": "Entity lib for redux state",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "travis-deploy-once": "travis-deploy-once --pro",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/foundcareers/redux-entity.git"
+    "url": "https://github.com/foundcareers/redux-entity.git"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +23,9 @@
     "@babel/preset-env": "^7.1.0",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.6.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "travis-deploy-once": "^5.0.9",
+    "semantic-release": "^15.11.0"
   },
   "jest": {
     "verbose": true
