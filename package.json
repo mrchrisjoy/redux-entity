@@ -6,7 +6,7 @@
   "scripts": {
     "commit": "git-cz",
     "test": "jest",
-    "test-coverage": "jest --coverage",
+    "test:coverage": "jest --coverage",
     "travis-deploy-once": "travis-deploy-once --pro",
     "semantic-release": "semantic-release"
   },

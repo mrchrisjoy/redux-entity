@@ -18,7 +18,7 @@ node_js:
   - '8'
 
 script:
-  - npm run test-coverage
+  - npm run test:coverage
 
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
