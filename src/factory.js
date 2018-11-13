@@ -1,30 +1,23 @@
-const initialCursorMeta = {
+const createCursorMeta = () => ({
   endCursor: null,
   hasNextPage: null,
   startCursor: null
-};
+});
 
-const initialPaginationMeta = {
+const createDefaultMeta = () => ({
   currentPage: 0,
   nextPage: 0,
   prevPage: null,
   totalPages: 0,
   totalCount: 0,
-}
+});
 
-export const createInitialMetaData = (params, useCursor=false) => {
-  const meta = useCursor ? initialCursorMeta : initialPaginationMeta;
-  return {
-   ...meta,
-    ...params
-  };
-};
+const createMetaData = useCursor => 
+  useCursor ? createCursorMeta() : createDefaultMeta();
 
-export const createInitialCollectionState = params => {
-  return {
-    entities: {},
-    meta: createInitialMetaData(),
-    selectedEntityId: null,
-    ...params
-  };
-};
+export const createCollectionState = (state, options={}) => ({
+  entities: {},
+  meta: createMetaData(options.useCursor),
+  selectedEntityId: null,
+  ...state
+});
