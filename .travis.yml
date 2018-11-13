@@ -4,6 +4,7 @@ env:
     - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
 
 language: node_js
+dist: trusty
 
 cache:
   directories:
@@ -17,7 +18,7 @@ node_js:
   - '8'
 
 script:
-  - npm run test --coverage
+  - npm run test-coverage
 
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
