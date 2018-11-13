@@ -1,4 +1,7 @@
 # @foundcareers/redux-entity
+
+[![build status](https://img.shields.io/npm/v/@foundcareers/redux-entity.svg)](https://www.npmjs.com/package/@foundcareers/redux-entity) [![build status](https://img.shields.io/travis/com/foundcareers/redux-entity.svg)](https://travis-ci.com/foundcareers/redux-entity) [![npm downloads](https://img.shields.io/npm/dt/@foundcareers/redux-entity.svg)](https://www.npmjs.com/package/@foundcareers/redux-entity)
+
 This library contains a bunch of helpers to manage entity collections in a redux store. 
 ## Installation 
 Install via npm: 

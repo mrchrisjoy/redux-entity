@@ -1,16 +1,20 @@
 {
   "name": "@foundcareers/redux-entity",
-  "version": "2.0.0",
+  "version": "2.0.0-development",
   "description": "Entity lib for redux state",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "commit": "git-cz",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "travis-deploy-once": "travis-deploy-once --pro",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/foundcareers/redux-entity.git"
+    "url": "https://github.com/foundcareers/redux-entity.git"
   },
-  "author": "",
+  "author": "Found Careers",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/foundcareers/redux-entity/issues"
@@ -21,9 +25,22 @@
     "@babel/preset-env": "^7.1.0",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.6.0",
-    "jest": "^23.6.0"
+    "commitizen": "^3.0.4",
+    "cz-conventional-changelog": "^2.1.0",
+    "ghooks": "^2.0.4",
+    "jest": "^23.6.0",
+    "semantic-release": "^15.11.0",
+    "travis-deploy-once": "^5.0.9"
   },
   "jest": {
     "verbose": true
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test"
+    }
   }
 }
