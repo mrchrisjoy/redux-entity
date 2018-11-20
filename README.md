@@ -173,6 +173,34 @@ Takes in an existing collection object and an initial collection object.
 
 Returns a new collection object with the existing state replaced with the initial collection object.
 
+### createReducer(initialState, actionTypes, handlers)
+This function returns a reducer function. Useful for getting rid of a lot of boiler plate reducer code.
+
+Takes in an initial collection state object, action types object and an handler object containing custom methods.
+
+Make sure when you add custom action types, add their appropriate custom reducer functions to the `handlers` object.
+
+##### Example Usage
+```
+// job.actions.js
+export const actionTypes = {
+  ADD_ENTITY: '[Job] Add Entity',
+  CUSTOM: '[Job] Custom'
+  ...
+}
+
+// job.reducer.js
+export const reducer = reduxEntity.createReducer(
+  reduxEntity.createCollectionState(),
+  actionTypes,
+  { // custom handlers
+    [actionTypes.CUSTOM]: (state, {payload}) => ({
+      ...state, custom: payload
+    })
+  }
+);
+```
+
 ## Selector Helpers
 
 ### getEntities
