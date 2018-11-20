@@ -12,7 +12,7 @@ const initialState = createCollectionState({
   selectedEntityId: '1',
 });
 
-describe('Testing reducer', () => {
+describe('reducer.js', () => {
   describe('addEntity', () => {
     it('should add new entity', () => {
       const payload = {id: '6'};
@@ -162,4 +162,53 @@ describe('Testing reducer', () => {
       expect(Object.keys(finalState.entities).length).toEqual(0);
     });
   });
+
+  describe('createReducer', () => {
+    it('should reduce state using a simple action', () => {
+      const actionTypes = {ADD_ENTITY: '[Collection] Add Entity'};
+      const _reducer = reducer.createReducer(initialState, actionTypes);
+      const payload = {id: 6, name: 'Bob Cutlass'};
+      const action = {type: actionTypes.ADD_ENTITY, payload};
+      const newState = _reducer(initialState, action);
+      expect(newState.entities).toMatchObject({...initialState.entities, ...{[payload.id]: payload}});
+      expect(newState.entities[payload.id]).toMatchObject(payload);
+      expect(Object.keys(newState.entities).length).toBe(6);
+    });
+
+    it('should reduce state using a custom action', () => {
+      const actionTypes = {CUSTOM_ACTION: '[Collection] Custom Action'};
+      const handlers = {
+        [actionTypes.CUSTOM_ACTION]: (state, {payload}) => ({
+          ...state, custom: payload
+        })
+      };
+      const _reducer = reducer.createReducer(initialState, actionTypes, handlers);
+      const payload = {id: 6, name: 'Bob Cutlass'};
+      const action = {type: actionTypes.CUSTOM_ACTION, payload};
+      const newState = _reducer(initialState, action);
+      expect(newState.custom).toMatchObject(payload);
+      expect(newState.entities).toMatchObject(initialState.entities);
+    });
+
+    it('should reduce state using both simple & custom actions', () => {
+      const actionTypes = {
+        ADD_ENTITY: '[Collection] Add Entity',
+        CUSTOM_ACTION: '[Collection] Custom Action'
+      };
+      const handlers = {
+        [actionTypes.CUSTOM_ACTION]: (state, {payload}) => ({
+          ...state, custom: payload
+        })
+      };
+      const _reducer = reducer.createReducer(initialState, actionTypes, handlers);
+      const payload = {id: 6, name: 'Bob Cutlass'};
+      const addEntityState = _reducer(initialState, {type: actionTypes.ADD_ENTITY, payload});
+      const customActionState = _reducer(addEntityState, {type: actionTypes.CUSTOM_ACTION, payload});
+      const expectEntities = {...initialState.entities, ...{[payload.id]: payload}};
+      expect(addEntityState.entities).toMatchObject(expectEntities);
+      expect(addEntityState.custom).toBeUndefined();
+      expect(customActionState.entities).toMatchObject(expectEntities);
+      expect(customActionState.custom).toMatchObject(payload);
+    });
+  });  
 });
