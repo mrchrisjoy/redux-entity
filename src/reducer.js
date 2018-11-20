@@ -32,7 +32,8 @@ export const createReducer = (
   initialState,
   actionTypes,
   handlers = {}
-) => (state = initialState, {type, payload}) => {
+) => (state = initialState, action) => {
+  const {type, payload} = action;
   switch (type) {
     case actionTypes.ADD_ENTITY:
       return addEntity(state, payload);
@@ -50,6 +51,6 @@ export const createReducer = (
       return reset(state, initialState);
     default: 
       return handlers.hasOwnProperty(type) ?
-        handlers[type](state, {payload}) : state
+        handlers[type](state, action) : state
   }
 };

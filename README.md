@@ -180,24 +180,61 @@ Takes in an initial collection state object, action types object and an handler 
 
 Make sure when you add custom action types, add their appropriate custom reducer functions to the `handlers` object.
 
+#### Default Collection Action Cases
+
+|Type|Payload|Description|
+|---|---|---|
+|  ADD_ENTITY  | Object |  Add a single entity to the collection | 
+|  ADD_ENTITIES  | Array(Object) | Add (an array of) entities to the collection  |
+|  REMOVE_ENTITY  | Object | Remove a single entity from the collection  |  
+|  REMOVE_ENTITIES  | Array(Object) | Remove (an array of) entities from the collection  |
+|  ADD_META  | Object | Add the pagination meta to the state | 
+|  SELECT  | String | Select a single entity  |
+|  RESET  | None | Reset the state to the initial state |
+
 ##### Example Usage
 ```
 // job.actions.js
-export const actionTypes = {
+export const jobActionTypes = {
   ADD_ENTITY: '[Job] Add Entity',
+  REMOVE_ENTITY: '[Job] Remove Entity',
   CUSTOM: '[Job] Custom'
   ...
 }
+```
 
-// job.reducer.js
+###### Creating a Reducer for a Collection of Entities (default case)
+```
+// jobs.reducer.js
+
 export const reducer = reduxEntity.createReducer(
   reduxEntity.createCollectionState(),
-  actionTypes,
-  { // custom handlers
-    [actionTypes.CUSTOM]: (state, {payload}) => ({
-      ...state, custom: payload
-    })
-  }
+  jobActionTypes
+);
+```
+
+###### Creating a Reducer for a Collection of Entities (customized case)
+```
+// job.reducer.js
+// jobs.reducer.js
+
+const initialState = reduxEntity.createCollectionState({
+  entityIds: [ ]
+});
+
+const customHandlers = {
+  [jobActionTypes.ADD_ENTITY_ID]: (state, action) => ({
+      ...state, entityIds: [...state.entityIds, action.payload]
+  }),
+  [jobActionTypes.REMOVE_ENTITY_ID]: (state, action) => ({
+      ...state, entityIds: state.entityIds.filter(e => e !== action.payload)
+  })
+};
+
+export const reducer = reduxEntity.createReducer(
+  initialState,
+  jobActionTypes,
+  customHandlers
 );
 ```
 
