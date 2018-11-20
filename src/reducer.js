@@ -1,5 +1,5 @@
 export const addEntity = (state, payload) =>
-  ({...state, entities: {...state.entities, ...{[payload.id]: payload}}});
+  ({...state, entities: {...state.entities, [payload.id]: payload}});
 
 export const addEntities = (state, payload) => 
   ({...state, entities: {...state.entities, ...payload}});
