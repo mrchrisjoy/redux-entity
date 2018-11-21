@@ -15,6 +15,12 @@ const createDefaultMeta = () => ({
 const createMetaData = useCursor => 
   useCursor ? createCursorMeta() : createDefaultMeta();
 
+/**
+ * Collection State Object Creator
+ * @param {Object} state Object that's spread into the collection state.
+ * @param {Object} options Configuration object.
+ * @param {boolean} options.useCursor Set to `true` to use cursor meta.
+ */
 export const createCollectionState = (state, options={}) => ({
   entities: {},
   meta: createMetaData(options.useCursor),
