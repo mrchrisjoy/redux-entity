@@ -1,3 +1,5 @@
+/** @module Factories */
+
 const createCursorMeta = () => ({
   endCursor: null,
   hasNextPage: null,
@@ -16,7 +18,8 @@ const createMetaData = useCursor =>
   useCursor ? createCursorMeta() : createDefaultMeta();
 
 /**
- * Collection State Object Creator
+ * Collection state Creator
+ * @memberof Factories
  * @param {Object} state Object that's spread into the collection state.
  * @param {Object} options Configuration object.
  * @param {boolean} options.useCursor Set to `true` to use cursor meta.

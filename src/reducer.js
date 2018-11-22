@@ -1,6 +1,9 @@
+/** @module Reducers */
+
 /** 
  * Adds an entity to the collection state.
- * @param {Object} state Collection state object.
+ * @memberof Reducers
+ * @param {Object} state Collection state.
  * @param {Object} payload The entity object you'd like to add. Must contain an `id` attribute
  */
 export const addEntity = (state, payload) =>
@@ -8,7 +11,8 @@ export const addEntity = (state, payload) =>
 
 /**
  * Adds entities to the collection state.
- * @param {Object} state Collection state object.
+ * @memberof Reducers
+ * @param {Object} state Collection state.
  * @param {Object} payload The collection of entities you would 
  */
 export const addEntities = (state, payload) => 
@@ -16,7 +20,8 @@ export const addEntities = (state, payload) =>
 
 /**
  * Removes an entity from the collection state.
- * @param {Object} state Collection state object.
+ * @memberof Reducers
+ * @param {Object} state Collection state.
  * @param {string} id Entity's id you'd like to remove from the collection state.
  */
 export const removeEntity = (state, id) => {
@@ -27,7 +32,8 @@ export const removeEntity = (state, id) => {
 
 /**
  * Removes entities from the collection state.
- * @param {Object} state  Collection state object.
+ * @memberof Reducers
+ * @param {Object} state  Collection state.
  * @param {string[]} ids An array of entity ids.
  */
 export const removeEntities = (state, ids) => {
@@ -38,14 +44,16 @@ export const removeEntities = (state, ids) => {
 
 /**
  * Removes the selected entity.
- * @param {Object} state Collection state object.
+ * @memberof Reducers
+ * @param {Object} state Collection state.
  */
 export const removeSelectedEntity = (state) =>
   ({...state, selectedEntityId: null});
 
 /**
  * Adds meta to the collection state.
- * @param {Object} state Collection state object.
+ * @memberof Reducers
+ * @param {Object} state Collection state.
  * @param {Object} payload The meta object.
  */
 export const addMeta = (state, payload) =>
@@ -53,7 +61,8 @@ export const addMeta = (state, payload) =>
 
 /**
  * Selects an entity in the collection state.
- * @param {Object} state Collection state object.
+ * @memberof Reducers
+ * @param {Object} state Collection state.
  * @param {Object} payload Entity Id that's being selected.
  */
 export const select = (state, payload) =>
@@ -61,15 +70,17 @@ export const select = (state, payload) =>
 
 /**
  * Resets the collection state.
- * @param {Object} state Current collection state object.
- * @param {Object} initialState Initial collection state object (refer to `createCollectionState`).
+ * @memberof Reducers
+ * @param {Object} state Current Collection state.
+ * @param {Object} initialState Initial Collection state (refer to `createCollectionState`).
  */
 export const reset = (state, initialState) => 
   ({...state, ...initialState});
 
 /**
  * Helper function used to create a reducer function.
- * @param {Object} initialState Collection state object.
+ * @memberof Reducers
+ * @param {Object} initialState Collection state.
  * @param {Object} actionTypes Object containing the reducer's default action types.
  * @param {Object} handlers Object containing custom reducer actions.
  */
