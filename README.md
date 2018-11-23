@@ -12,56 +12,57 @@ Install via npm:
 Install via yarn: 
 `yarn add @foundcareers/redux-entity`
 
-## Default Collection State
+## Example Collection State
 
-Here's an example store that `@foundcareers/redux-entity` can work with, with the following collections: `todos` and `users`.
-
-    {
-      todos: {
-        entities: {
-          'be9a-a25d21033a20': {
-            id: 'be9a-a25d21033a20',
-            value: 'Wash clothes'
-          },
-          'be9a-423mfas5345sd': {
-            id: 'be9a-423mfas5345sd',
-            value: 'Write todo'
-          },
-          'be9a-a245gf2033a20': {
-            id: 'be9a-a245gf2033a20',
-            value: 'Grill salmon'
-          },      
-        },
-        meta: {
-          currentPage: 2,
-          nextPage: 3,
-          prevPage: 1,
-          totalPages: 4,
-          totalCount: 12,
-        },
-        selectedEntityId: 'be9a-a245gf2033a20',
+Here's an example store that works with `@foundcareers/redux-entity`.
+```js
+{
+  todos: {
+    entities: {
+      'be9a-a25d21033a20': {
+        id: 'be9a-a25d21033a20',
+        value: 'Wash clothes'
       },
-      users: {
-        entities: {
-          'be9a-a245gf2033a21': {
-            id: 'be9a-a245gf2033a21',
-            name: 'Bob cutlass'
-          },
-          'ke9a-a245gf2033a22': {
-            id: 'ke9a-a245gf2033a22',
-            name: 'Peter Noopter'
-          },
-        },
-        meta: {
-          currentPage: 2,
-          nextPage: 1,
-          prevPage: 1,
-          totalPages: 2,
-          totalCount: 3,
-        },
-        selectedEntityId: 'ke9a-a245gf2033a22',
+      'be9a-423mfas5345sd': {
+        id: 'be9a-423mfas5345sd',
+        value: 'Write todo'
       },
-    }
+      'be9a-a245gf2033a20': {
+        id: 'be9a-a245gf2033a20',
+        value: 'Grill salmon'
+      },      
+    },
+    meta: {
+      currentPage: 2,
+      nextPage: 3,
+      prevPage: 1,
+      totalPages: 4,
+      totalCount: 12,
+    },
+    selectedEntityId: 'be9a-a245gf2033a20',
+  },
+  users: {
+    entities: {
+      'be9a-a245gf2033a21': {
+        id: 'be9a-a245gf2033a21',
+        name: 'Bob cutlass'
+      },
+      'ke9a-a245gf2033a22': {
+        id: 'ke9a-a245gf2033a22',
+        name: 'Peter Noopter'
+      },
+    },
+    meta: {
+      currentPage: 2,
+      nextPage: 1,
+      prevPage: 1,
+      totalPages: 2,
+      totalCount: 3,
+    },
+    selectedEntityId: 'ke9a-a245gf2033a22',
+  },
+}
+```
 
 # Documentation
 
@@ -69,45 +70,50 @@ Here's an example store that `@foundcareers/redux-entity` can work with, with th
 
 ### Table of Contents
 
--   [Factories](#factories)
-    -   [createCollectionState](#createcollectionstate)
-        -   [Parameters](#parameters)
-        -   [Examples](#examples)
--   [Selectors](#selectors)
-    -   [getEntities](#getentities)
-        -   [Parameters](#parameters-1)
-    -   [getEntitiesArray](#getentitiesarray)
-        -   [Parameters](#parameters-2)
-        -   [Examples](#examples-1)
-    -   [getSelectedEntityId](#getselectedentityid)
-        -   [Parameters](#parameters-3)
-    -   [getMeta](#getmeta)
-        -   [Parameters](#parameters-4)
-    -   [getNextPage](#getnextpage)
-        -   [Parameters](#parameters-5)
-    -   [getPrevPage](#getprevpage)
-        -   [Parameters](#parameters-6)
--   [Reducers](#reducers)
-    -   [Examples](#examples-2)
-    -   [addEntity](#addentity)
-        -   [Parameters](#parameters-7)
-    -   [addEntities](#addentities)
-        -   [Parameters](#parameters-8)
-    -   [removeEntity](#removeentity)
-        -   [Parameters](#parameters-9)
-    -   [removeEntities](#removeentities)
-        -   [Parameters](#parameters-10)
-    -   [removeSelectedEntity](#removeselectedentity)
-        -   [Parameters](#parameters-11)
-    -   [addMeta](#addmeta)
-        -   [Parameters](#parameters-12)
-    -   [select](#select)
-        -   [Parameters](#parameters-13)
-    -   [reset](#reset)
-        -   [Parameters](#parameters-14)
-    -   [createReducer](#createreducer)
-        -   [Parameters](#parameters-15)
-        -   [Examples](#examples-3)
+- [@foundcareers/redux-entity](#foundcareersredux-entity)
+  - [Installation](#installation)
+  - [Example Collection State](#example-collection-state)
+- [Documentation](#documentation)
+    - [Table of Contents](#table-of-contents)
+  - [Factories](#factories)
+    - [createCollectionState](#createcollectionstate)
+      - [Parameters](#parameters)
+      - [Examples](#examples)
+  - [Selectors](#selectors)
+    - [getEntities](#getentities)
+      - [Parameters](#parameters-1)
+    - [getEntitiesArray](#getentitiesarray)
+      - [Parameters](#parameters-2)
+      - [Examples](#examples-1)
+    - [getSelectedEntityId](#getselectedentityid)
+      - [Parameters](#parameters-3)
+    - [getMeta](#getmeta)
+      - [Parameters](#parameters-4)
+    - [getNextPage](#getnextpage)
+      - [Parameters](#parameters-5)
+    - [getPrevPage](#getprevpage)
+      - [Parameters](#parameters-6)
+  - [Reducers](#reducers)
+    - [Examples](#examples-2)
+    - [addEntity](#addentity)
+      - [Parameters](#parameters-7)
+    - [addEntities](#addentities)
+      - [Parameters](#parameters-8)
+    - [removeEntity](#removeentity)
+      - [Parameters](#parameters-9)
+    - [removeEntities](#removeentities)
+      - [Parameters](#parameters-10)
+    - [removeSelectedEntity](#removeselectedentity)
+      - [Parameters](#parameters-11)
+    - [addMeta](#addmeta)
+      - [Parameters](#parameters-12)
+    - [select](#select)
+      - [Parameters](#parameters-13)
+    - [reset](#reset)
+      - [Parameters](#parameters-14)
+    - [createReducer](#createreducer)
+      - [Parameters](#parameters-15)
+      - [Examples](#examples-3)
 
 ## Factories
 
