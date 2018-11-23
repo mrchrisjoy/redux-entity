@@ -12,7 +12,7 @@ const initialState = factory.createCollectionState({
   selectedEntityId: '1',
 });
 
-describe('Testing selector', () => {
+describe('selector.js', () => {
   describe('getEntities', () => {
     it('should select entities', () => {
       const state = Object.assign({}, initialState);

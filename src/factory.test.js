@@ -1,6 +1,6 @@
 import * as factory from './factory';
 
-describe('Testing factory', () => {
+describe('factory.js', () => {
   describe('createCollectionState', () => {
     it('should create initial collection state, with standard pagination', () => {
       const initialCollectionState = factory.createCollectionState();
