@@ -7,7 +7,8 @@ This library contains a bunch of helpers to manage entity collections in a redux
 ## Installation
 
 Install via npm: 
-`npm i -s @foundcareers/redux-entity` \\
+`npm i -s @foundcareers/redux-entity`
+
 Install via yarn: 
 `yarn add @foundcareers/redux-entity`
 
@@ -300,7 +301,7 @@ export const reducer = (state = initialState, {type, payload}) => {
 
 ### addEntity
 
-Adds an entity to the collection state.
+Add an entity to the collection state.
 
 #### Parameters
 
@@ -318,7 +319,7 @@ Adds entities to the collection state.
 
 ### removeEntity
 
-Removes an entity from the collection state.
+Remove an entity from the collection state.
 
 #### Parameters
 
@@ -336,7 +337,7 @@ Removes entities from the collection state.
 
 ### removeSelectedEntity
 
-Removes the selected entity.
+Remove the selected entity.
 
 #### Parameters
 
@@ -344,7 +345,7 @@ Removes the selected entity.
 
 ### addMeta
 
-Adds meta to the collection state.
+Add a meta object to the collection state.
 
 #### Parameters
 
@@ -353,7 +354,7 @@ Adds meta to the collection state.
 
 ### select
 
-Selects an entity in the collection state.
+Select an entity in the collection state.
 
 #### Parameters
 
@@ -362,7 +363,7 @@ Selects an entity in the collection state.
 
 ### reset
 
-Resets the collection state.
+Reset the collection state.
 
 #### Parameters
 
@@ -390,14 +391,14 @@ export const jobActionTypes = {
  ...
 }
 
-// Creating a Reducer for a Collection of Entities (customized case)
+// Creating a reducer for a collection of entities (default case)
 // job.reducer.js
 export const reducer = reduxEntity.createReducer(
  reduxEntity.createCollectionState(),
  jobActionTypes
 );
 
-// Creating a Reducer for a Collection of Entities (default case)
+// Creating a reducer for a collection of entities (customized case)
 // job.reducer.js
 const initialState = reduxEntity.createCollectionState({
  entityIds: [ ]

@@ -31,7 +31,7 @@
  */
 
 /** 
- * Adds an entity to the collection state.
+ * Add an entity to the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
  * @param {Object} payload The entity object you'd like to add. Must contain an `id` attribute
@@ -49,7 +49,7 @@ export const addEntities = (state, payload) =>
   ({...state, entities: {...state.entities, ...payload}});
 
 /**
- * Removes an entity from the collection state.
+ * Remove an entity from the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
  * @param {string} id Entity's id you'd like to remove from the collection state.
@@ -73,7 +73,7 @@ export const removeEntities = (state, ids) => {
 };
 
 /**
- * Removes the selected entity.
+ * Remove the selected entity.
  * @memberof Reducers
  * @param {Object} state Collection state.
  */
@@ -81,7 +81,7 @@ export const removeSelectedEntity = (state) =>
   ({...state, selectedEntityId: null});
 
 /**
- * Adds meta to the collection state.
+ * Add a meta object to the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
  * @param {Object} payload The meta object.
@@ -90,7 +90,7 @@ export const addMeta = (state, payload) =>
   ({...state, meta: {...payload}});
 
 /**
- * Selects an entity in the collection state.
+ * Select an entity in the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
  * @param {Object} payload Entity Id that's being selected.
@@ -99,7 +99,7 @@ export const select = (state, payload) =>
   ({...state, selectedEntityId: payload});
 
 /**
- * Resets the collection state.
+ * Reset the collection state.
  * @memberof Reducers
  * @param {Object} state Current Collection state.
  * @param {Object} initialState Initial Collection state (refer to `createCollectionState`).
@@ -122,14 +122,14 @@ export const reset = (state, initialState) =>
  *  ...
  * }
  * 
- * // Creating a Reducer for a Collection of Entities (customized case)
+ * // Creating a reducer for a collection of entities (default case)
  * // job.reducer.js
  * export const reducer = reduxEntity.createReducer(
  *  reduxEntity.createCollectionState(),
  *  jobActionTypes
  * );
  * 
- * // Creating a Reducer for a Collection of Entities (default case)
+ * // Creating a reducer for a collection of entities (customized case)
  * // job.reducer.js
  * const initialState = reduxEntity.createCollectionState({
  *  entityIds: [ ]
