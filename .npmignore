@@ -1,3 +1,6 @@
 src/**/*.test.js
 .babelrc
 .travis.yml
+cc-test-reporter
+coverage
+yarn.lock
