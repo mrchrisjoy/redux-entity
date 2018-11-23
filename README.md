@@ -71,11 +71,13 @@ Here's an example store that `@foundcareers/redux-entity` can work with, with th
 -   [Factories](#factories)
     -   [createCollectionState](#createcollectionstate)
         -   [Parameters](#parameters)
+        -   [Examples](#examples)
 -   [Selectors](#selectors)
     -   [getEntities](#getentities)
         -   [Parameters](#parameters-1)
     -   [getEntitiesArray](#getentitiesarray)
         -   [Parameters](#parameters-2)
+        -   [Examples](#examples-1)
     -   [getSelectedEntityId](#getselectedentityid)
         -   [Parameters](#parameters-3)
     -   [getMeta](#getmeta)
@@ -85,6 +87,7 @@ Here's an example store that `@foundcareers/redux-entity` can work with, with th
     -   [getPrevPage](#getprevpage)
         -   [Parameters](#parameters-6)
 -   [Reducers](#reducers)
+    -   [Examples](#examples-2)
     -   [addEntity](#addentity)
         -   [Parameters](#parameters-7)
     -   [addEntities](#addentities)
@@ -103,18 +106,60 @@ Here's an example store that `@foundcareers/redux-entity` can work with, with th
         -   [Parameters](#parameters-14)
     -   [createReducer](#createreducer)
         -   [Parameters](#parameters-15)
+        -   [Examples](#examples-3)
 
 ## Factories
 
 ### createCollectionState
 
-Collection state Creator
+Creates an initial collection state object with standard or cursor meta.
 
 #### Parameters
 
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object that's spread into the collection state.
 -   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Configuration object. (optional, default `{}`)
     -   `options.useCursor` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Set to `true` to use cursor meta.
+
+#### Examples
+
+```javascript
+import {createCollectionState} from '@foundcareers/redux-entity';
+const stateWithStandardPagination = createCollectionState({
+ previouslySelectedEntityId: null,
+}, false);
+
+const options = {
+ useCursor: tru
+};
+
+const stateWithMetaPagination = createCollectionState({}, options);
+
+// Returns the following collection state objects
+
+// console.log(stateWithStandardPagination)
+{
+ entities: {},
+ meta: {
+   currentPage: 0,
+   nextPage: 0,
+   prevPage: null,
+   totalPages: 0,
+   totalCount: 0
+ },
+ selectedEntityId: null
+}
+
+// console.log(stateWithCursorPagination)
+{
+ entities: {},
+ meta: {
+   endCursor: null,
+   hasNextPage: null,
+   startCursor: null
+ },
+ selectedEntityId: null,  
+}
+```
 
 ## Selectors
 
@@ -134,6 +179,58 @@ Get a sorted array of entities from a collection state.
 
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
 -   `compareFunction` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** Comparator used to compare two objects.
+
+#### Examples
+
+```javascript
+import {getEntitiesArray} from '@foundcareers/redux-entity';
+
+const todoState = {
+ entities: {
+   'be9a-a25d21033a20': {
+     id: 'be9a-a25d21033a20',
+     value: 'Wash clothes'
+   },
+   'be9a-423mfas5345sd': {
+     id: 'be9a-423mfas5345sd',
+     value: 'Write todo'
+   },
+   'be9a-a245gf2033a20': {
+     id: 'be9a-a245gf2033a20',
+     value: 'Grill salmon'
+   }
+ },
+ meta: {
+   currentPage: 2,
+   nextPage: 3,
+   prevPage: 1,
+   totalPages: 4,
+   totalCount: 12,
+ },
+ selectedEntityId: 'be9a-a245gf2033a20'
+};
+
+const compareFunction = (a, b) => a.value.localeCompare(b.value);
+
+const entities = getEntitiesArray(todoState, compareFunction);
+
+// Resulting in the following entities array
+// console.log(entities)
+[
+ {
+   id: 'be9a-a245gf2033a20',
+   value: 'Grill salmon'
+ },
+ {
+   id: 'be9a-a25d21033a20',
+   value: 'Wash clothes'
+ },
+ {
+   id: 'be9a-423mfas5345sd',
+   value: 'Write todo'
+ }
+]
+```
 
 ### getSelectedEntityId
 
@@ -168,6 +265,38 @@ Get previous page from a collection state.
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
 
 ## Reducers
+
+### Examples
+
+```javascript
+import * as reduxEntity from '@foundcareers/redux-entity';
+import * as action from '../actions/todo.js';
+
+const initialState = reduxEntity.createCollectionState();
+
+export const reducer = (state = initialState, {type, payload}) => {
+ switch (type) {
+   case action.ADD_ENTITY:
+     return reduxEntity.addEntity(state, payload);
+   case action.ADD_ENTITIES:
+     return reduxEntity.addEntities(state, payload);
+   case action.REMOVE_ENTITY:
+     return reduxEntity.removeEntity(state, payload);
+   case action.REMOVE_ENTITIES:
+     return reduxEntity.removeEntities(state, payload);
+   case action.REMOVE_SELECTED_ENTITY:
+     return reduxEntity.removeSelectedEntity(state, payload);
+   case action.ADD_META:
+     return reduxEntity.addMeta(state, payload);
+   case action.SELECT:
+     return reduxEntity.select(state, payload);
+   case action.RESET:
+     return reduxEntity.reset(state, payload);
+   default:
+     return state;
+ }
+};
+```
 
 ### addEntity
 
@@ -249,3 +378,41 @@ Helper function used to create a reducer function.
 -   `initialState` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
 -   `actionTypes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing the reducer's default action types.
 -   `handlers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing custom reducer actions. (optional, default `{}`)
+
+#### Examples
+
+```javascript
+// job.actions.js
+export const jobActionTypes = {
+ ADD_ENTITY: '[Job] Add Entity',
+ REMOVE_ENTITY: '[Job] Remove Entity',
+ CUSTOM: '[Job] Custom'
+ ...
+}
+
+// Creating a Reducer for a Collection of Entities (customized case)
+// job.reducer.js
+export const reducer = reduxEntity.createReducer(
+ reduxEntity.createCollectionState(),
+ jobActionTypes
+);
+
+// Creating a Reducer for a Collection of Entities (default case)
+// job.reducer.js
+const initialState = reduxEntity.createCollectionState({
+ entityIds: [ ]
+});
+const customHandlers = {
+ [jobActionTypes.ADD_ENTITY_ID]: (state, action) => ({
+   ...state, entityIds: [...state.entityIds, action.payload]
+ }),
+ [jobActionTypes.REMOVE_ENTITY_ID]: (state, action) => ({
+   ...state, entityIds: state.entityIds.filter(e => e !== action.payload)
+ })
+};
+export const reducer = reduxEntity.createReducer(
+ initialState,
+ jobActionTypes,
+ customHandlers
+);
+```

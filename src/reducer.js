@@ -1,4 +1,34 @@
-/** @module Reducers */
+/**
+ * @module Reducers
+ * @example
+ * import * as reduxEntity from '@foundcareers/redux-entity';
+ * import * as action from '../actions/todo.js';
+ * 
+ * const initialState = reduxEntity.createCollectionState();
+ * 
+ * export const reducer = (state = initialState, {type, payload}) => {
+ *  switch (type) {
+ *    case action.ADD_ENTITY:
+ *      return reduxEntity.addEntity(state, payload);
+ *    case action.ADD_ENTITIES:
+ *      return reduxEntity.addEntities(state, payload);
+ *    case action.REMOVE_ENTITY:
+ *      return reduxEntity.removeEntity(state, payload);
+ *    case action.REMOVE_ENTITIES:
+ *      return reduxEntity.removeEntities(state, payload);
+ *    case action.REMOVE_SELECTED_ENTITY:
+ *      return reduxEntity.removeSelectedEntity(state, payload);
+ *    case action.ADD_META:
+ *      return reduxEntity.addMeta(state, payload);
+ *    case action.SELECT:
+ *      return reduxEntity.select(state, payload);
+ *    case action.RESET:
+ *      return reduxEntity.reset(state, payload);
+ *    default:
+ *      return state;
+ *  }
+ * };
+ */
 
 /** 
  * Adds an entity to the collection state.
@@ -83,6 +113,40 @@ export const reset = (state, initialState) =>
  * @param {Object} initialState Collection state.
  * @param {Object} actionTypes Object containing the reducer's default action types.
  * @param {Object} handlers Object containing custom reducer actions.
+ * @example
+ * // job.actions.js
+ * export const jobActionTypes = {
+ *  ADD_ENTITY: '[Job] Add Entity',
+ *  REMOVE_ENTITY: '[Job] Remove Entity',
+ *  CUSTOM: '[Job] Custom'
+ *  ...
+ * }
+ * 
+ * // Creating a Reducer for a Collection of Entities (customized case)
+ * // job.reducer.js
+ * export const reducer = reduxEntity.createReducer(
+ *  reduxEntity.createCollectionState(),
+ *  jobActionTypes
+ * );
+ * 
+ * // Creating a Reducer for a Collection of Entities (default case)
+ * // job.reducer.js
+ * const initialState = reduxEntity.createCollectionState({
+ *  entityIds: [ ]
+ * });
+ * const customHandlers = {
+ *  [jobActionTypes.ADD_ENTITY_ID]: (state, action) => ({
+ *    ...state, entityIds: [...state.entityIds, action.payload]
+ *  }),
+ *  [jobActionTypes.REMOVE_ENTITY_ID]: (state, action) => ({
+ *    ...state, entityIds: state.entityIds.filter(e => e !== action.payload)
+ *  })
+ * };
+ * export const reducer = reduxEntity.createReducer(
+ *  initialState,
+ *  jobActionTypes,
+ *  customHandlers
+ * );
  */
 export const createReducer = (
   initialState,
