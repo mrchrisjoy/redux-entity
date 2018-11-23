@@ -9,7 +9,9 @@
     "test:coverage": "jest --coverage",
     "travis-deploy-once": "travis-deploy-once --pro",
     "semantic-release": "semantic-release",
-    "docs": "documentation readme src/**  --section=Documentation --shallow"
+    "docs:validate": "documentation lint src/**",
+    "docs:build": "documentation readme src/**  --section=Documentation --shallow",
+    "docs": "npm run docs:build"
   },
   "repository": {
     "type": "git",
@@ -39,7 +41,7 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test"
+      "pre-commit": "npm run test && npm run docs:validate"
     },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
