@@ -127,19 +127,12 @@ Creates an initial collection state object with standard or cursor meta.
 
 ```javascript
 import {createCollectionState} from '@foundcareers/redux-entity';
+
+// State with Standard Pagination:
 const stateWithStandardPagination = createCollectionState({
  previouslySelectedEntityId: null,
 }, false);
-
-const options = {
- useCursor: tru
-};
-
-const stateWithMetaPagination = createCollectionState({}, options);
-
-// Returns the following collection state objects
-
-// console.log(stateWithStandardPagination)
+// Output:
 {
  entities: {},
  meta: {
@@ -152,7 +145,11 @@ const stateWithMetaPagination = createCollectionState({}, options);
  selectedEntityId: null
 }
 
-// console.log(stateWithCursorPagination)
+// State with Cursor Pagination:
+const stateWithMetaPagination = createCollectionState({}, {
+ useCursor: true
+});
+// Output:
 {
  entities: {},
  meta: {
