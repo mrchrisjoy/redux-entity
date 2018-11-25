@@ -36,8 +36,9 @@
  * @param {Object} state Collection state.
  * @param {Object} payload The entity object you'd like to add. Must contain an `id` attribute
  */
-export const addEntity = (state, payload) =>
-  ({...state, entities: {...state.entities, [payload.id]: payload}});
+export const addEntity = (state, payload) => ({
+  ...state, entities: { ...state.entities, [payload.id]: payload },
+});
 
 /**
  * Adds entities to the collection state.
@@ -45,8 +46,9 @@ export const addEntity = (state, payload) =>
  * @param {Object} state Collection state.
  * @param {Object} payload The collection of entities you would 
  */
-export const addEntities = (state, payload) => 
-  ({...state, entities: {...state.entities, ...payload}});
+export const addEntities = (state, payload) => ({
+  ...state, entities: { ...state.entities, ...payload },
+});
 
 /**
  * Remove an entity from the collection state.
@@ -57,7 +59,7 @@ export const addEntities = (state, payload) =>
 export const removeEntity = (state, id) => {
   const entities = Object.assign({}, state.entities);
   delete entities[id];
-  return {...state, entities};
+  return { ...state, entities };
 };
 
 /**
@@ -68,8 +70,8 @@ export const removeEntity = (state, id) => {
  */
 export const removeEntities = (state, ids) => {
   const entities = Object.assign({}, state.entities);
-  ids.forEach(id => delete entities[id])
-  return {...state, entities};
+  ids.forEach(id => delete entities[id]);
+  return { ...state, entities };
 };
 
 /**
@@ -77,8 +79,9 @@ export const removeEntities = (state, ids) => {
  * @memberof Reducers
  * @param {Object} state Collection state.
  */
-export const removeSelectedEntity = (state) =>
-  ({...state, selectedEntityId: null});
+export const removeSelectedEntity = state => ({
+  ...state, selectedEntityId: null,
+});
 
 /**
  * Add a meta object to the collection state.
@@ -86,8 +89,9 @@ export const removeSelectedEntity = (state) =>
  * @param {Object} state Collection state.
  * @param {Object} payload The meta object.
  */
-export const addMeta = (state, payload) =>
-  ({...state, meta: {...payload}});
+export const addMeta = (state, payload) => ({
+  ...state, meta: { ...payload },
+});
 
 /**
  * Select an entity in the collection state.
@@ -95,8 +99,9 @@ export const addMeta = (state, payload) =>
  * @param {Object} state Collection state.
  * @param {Object} payload Entity Id that's being selected.
  */
-export const select = (state, payload) =>
-  ({...state, selectedEntityId: payload});
+export const select = (state, selectedEntityId) => ({
+  ...state, selectedEntityId,
+});
 
 /**
  * Reset the collection state.
@@ -104,8 +109,9 @@ export const select = (state, payload) =>
  * @param {Object} state Current Collection state.
  * @param {Object} initialState Initial Collection state (refer to `createCollectionState`).
  */
-export const reset = (state, initialState) => 
-  ({...state, ...initialState});
+export const reset = (state, initialState) => ({
+  ...state, ...initialState,
+});
 
 /**
  * Helper function used to create a reducer function.
@@ -151,9 +157,9 @@ export const reset = (state, initialState) =>
 export const createReducer = (
   initialState,
   actionTypes,
-  handlers = {}
+  handlers = {},
 ) => (state = initialState, action) => {
-  const {type, payload} = action;
+  const { type, payload } = action;
   switch (type) {
     case actionTypes.ADD_ENTITY:
       return addEntity(state, payload);
@@ -171,8 +177,8 @@ export const createReducer = (
       return select(state, payload);
     case actionTypes.RESET:
       return reset(state, initialState);
-    default: 
-      return handlers.hasOwnProperty(type) ?
-        handlers[type](state, action) : state
+    default:
+      return Object.prototype.hasOwnProperty.call(handlers, type)
+        ? handlers[type](state, action) : state;
   }
 };

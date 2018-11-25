@@ -24,10 +24,6 @@ export const getEntities = state => state.entities;
  *    'be9a-423mfas5345sd': {
  *      id: 'be9a-423mfas5345sd',
  *      value: 'Write todo'
- *    },
- *    'be9a-a245gf2033a20': {
- *      id: 'be9a-a245gf2033a20',
- *      value: 'Grill salmon'
  *    }
  *  },
  *  meta: {
@@ -53,15 +49,12 @@ export const getEntities = state => state.entities;
  *  {
  *    id: 'be9a-a25d21033a20',
  *    value: 'Wash clothes'
- *  },
- *  {
- *    id: 'be9a-423mfas5345sd',
- *    value: 'Write todo'
  *  }
  * ]
  */
-export const getEntitiesArray = (state, compareFunction) =>
-  Object.values(state.entities).sort(compareFunction);
+export const getEntitiesArray = (state, compareFunction) => Object
+  .values(state.entities)
+  .sort(compareFunction);
 
 /**
  * Get the selected entity id from a collection state.

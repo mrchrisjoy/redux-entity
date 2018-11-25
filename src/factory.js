@@ -1,9 +1,10 @@
 /** @module Factories */
+/* eslint-disable import/prefer-default-export */
 
 const createCursorMeta = () => ({
   endCursor: null,
   hasNextPage: null,
-  startCursor: null
+  startCursor: null,
 });
 
 const createDefaultMeta = () => ({
@@ -14,8 +15,7 @@ const createDefaultMeta = () => ({
   totalCount: 0,
 });
 
-const createMetaData = useCursor => 
-  useCursor ? createCursorMeta() : createDefaultMeta();
+const createMetaData = useCursor => (useCursor ? createCursorMeta() : createDefaultMeta());
 
 /**
  * Creates an initial collection state object with standard or cursor meta.
@@ -59,9 +59,9 @@ const createMetaData = useCursor =>
  *  selectedEntityId: null,  
  * }
  */
-export const createCollectionState = (state, options={}) => ({
+export const createCollectionState = (state, options = {}) => ({
   entities: {},
   meta: createMetaData(options.useCursor),
   selectedEntityId: null,
-  ...state
+  ...state,
 });

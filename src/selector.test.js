@@ -1,13 +1,14 @@
+/* global describe, it, expect */
 import * as selector from './selector';
 import * as factory from './factory';
 
 const initialState = factory.createCollectionState({
   entities: {
-    '1': {id: '1'},
-    '2': {id: '2'},
-    '3': {id: '3'},
-    '4': {id: '4'},
-    '5': {id: '5'},
+    1: { id: '1' },
+    2: { id: '2' },
+    3: { id: '3' },
+    4: { id: '4' },
+    5: { id: '5' },
   },
   selectedEntityId: '1',
 });
@@ -16,7 +17,7 @@ describe('selector.js', () => {
   describe('getEntities', () => {
     it('should select entities', () => {
       const state = Object.assign({}, initialState);
-      const {entities} = state;
+      const { entities } = state;
       const selected = selector.getEntities(state);
       expect(selected).toMatchObject(entities);
     });
@@ -25,7 +26,7 @@ describe('selector.js', () => {
   describe('getEntitiesArray', () => {
     it('should retrieve entities array', () => {
       const state = Object.assign({}, initialState);
-      const {entities} = state;
+      const { entities } = state;
       const entityArray = Object.values(entities);
       const selected = selector.getEntitiesArray(state);
       expect(selected).toEqual(expect.arrayContaining(entityArray));
@@ -33,7 +34,7 @@ describe('selector.js', () => {
 
     it('should retrieve entities sorted array', () => {
       const state = Object.assign({}, initialState);
-      const {entities} = state;
+      const { entities } = state;
       const compareFunc = (a, b) => a.id > b.id;
       const entityArray = Object.values(entities).sort(compareFunc);
       const selected = selector.getEntitiesArray(state, compareFunc);
@@ -44,7 +45,7 @@ describe('selector.js', () => {
   describe('getSelectedEntityId', () => {
     it('should select entity id', () => {
       const state = Object.assign({}, initialState);
-      const {selectedEntityId} = state;
+      const { selectedEntityId } = state;
       const selected = selector.getSelectedEntityId(state);
       expect(selected).toEqual(selectedEntityId);
     });
@@ -53,7 +54,7 @@ describe('selector.js', () => {
   describe('getMeta', () => {
     it('should select meta', () => {
       const state = Object.assign({}, initialState);
-      const {meta} = state;
+      const { meta } = state;
       const selected = selector.getMeta(state);
       expect(selected).toMatchObject(meta);
     });
@@ -62,7 +63,7 @@ describe('selector.js', () => {
   describe('getNextPage', () => {
     it('should select next page', () => {
       const state = Object.assign({}, initialState);
-      const {meta: {nextPage}} = state;
+      const { meta: { nextPage } } = state;
       const selected = selector.getNextPage(state);
       expect(selected).toEqual(nextPage);
     });
@@ -71,7 +72,7 @@ describe('selector.js', () => {
   describe('getPrevPage', () => {
     it('should select previous page', () => {
       const state = Object.assign({}, initialState);
-      const {meta: {prevPage}} = state;
+      const { meta: { prevPage } } = state;
       const selected = selector.getPrevPage(state);
       expect(selected).toEqual(prevPage);
     });
