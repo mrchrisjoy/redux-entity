@@ -18,13 +18,13 @@ const parseToMacroCase = str => str
   .toUpperCase();
 
 const createTypes = (namespace, config) => config.reduce((accumulator, action) => ({
-  ...accumulator,
   [parseToMacroCase(action)]: `[${parseToTitleCase(namespace)}] ${parseToTitleCase(action)}`,
+  ...accumulator,
 }), {});
 
 const createCreators = (types, config) => config.reduce((accumulator, action) => ({
-  ...accumulator,
   [action]: payload => ({ type: types[parseToMacroCase(action)], payload }),
+  ...accumulator,
 }), {});
 
 export const filterActionTypes = actions => Object.keys(actions)
