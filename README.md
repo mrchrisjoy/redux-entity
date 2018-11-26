@@ -215,7 +215,6 @@ const compareFunction = (a, b) => a.value.localeCompare(b.value);
 const entities = getEntitiesArray(todoState, compareFunction);
 
 // Resulting in the following entities array
-// console.log(entities)
 [
  {
    id: 'be9a-a245gf2033a20',
