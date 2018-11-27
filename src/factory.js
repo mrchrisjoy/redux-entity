@@ -25,7 +25,7 @@ const createMetaData = useCursor => (useCursor ? createCursorMeta() : createDefa
  * @param {boolean} options.useCursor Set to `true` to use cursor meta.
  * @example
  * import {createCollectionState} from '@foundcareers/redux-entity';
- * 
+ *
  * // State with Standard Pagination:
  * const stateWithStandardPagination = createCollectionState({
  *  previouslySelectedEntityId: null,
@@ -43,7 +43,7 @@ const createMetaData = useCursor => (useCursor ? createCursorMeta() : createDefa
  *  selectedEntityId: null,
  *  previouslySelectedEntityId: null
  * }
- * 
+ *
  * // State with Cursor Pagination:
  * const stateWithMetaPagination = createCollectionState({}, {
  *  useCursor: true
@@ -56,7 +56,7 @@ const createMetaData = useCursor => (useCursor ? createCursorMeta() : createDefa
  *    hasNextPage: null,
  *    startCursor: null
  *  },
- *  selectedEntityId: null,  
+ *  selectedEntityId: null,
  * }
  */
 export const createCollectionState = (state, options = {}) => ({

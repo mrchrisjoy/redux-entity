@@ -5,9 +5,9 @@ import { filterMacroCaseKeys } from './utils';
  * @example
  * import * as reduxEntity from '@foundcareers/redux-entity';
  * import * as action from '../actions/todo.js';
- * 
+ *
  * const initialState = reduxEntity.createCollectionState();
- * 
+ *
  * export const reducer = (state = initialState, {type, payload}) => {
  *  switch (type) {
  *    case action.ADD_ENTITY:
@@ -32,7 +32,7 @@ import { filterMacroCaseKeys } from './utils';
  * };
  */
 
-/** 
+/**
  * Add an entity to the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
@@ -46,7 +46,7 @@ export const addEntity = (state, payload) => ({
  * Adds entities to the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {Object} payload The collection of entities you would 
+ * @param {Object} payload Object containing entities you'd like to add to the collection.
  */
 export const addEntities = (state, payload) => ({
   ...state, entities: { ...state.entities, ...payload },
@@ -56,7 +56,7 @@ export const addEntities = (state, payload) => ({
  * Remove an entity from the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {string} id Entity's id you'd like to remove from the collection state.
+ * @param {string} id Id of entity you'd like to remove from the collection state.
  */
 export const removeEntity = (state, id) => {
   const entities = Object.assign({}, state.entities);
@@ -99,7 +99,7 @@ export const addMeta = (state, payload) => ({
  * Select an entity in the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {Object} payload Entity Id that's being selected.
+ * @param {Object} selectedEntityId Entity Id that's being selected.
  */
 export const select = (state, selectedEntityId) => ({
   ...state, selectedEntityId,
@@ -129,14 +129,14 @@ export const reset = (state, initialState) => ({
  *  CUSTOM: '[Job] Custom'
  *  ...
  * }
- * 
+ *
  * // Creating a reducer for a collection of entities (default case)
  * // job.reducer.js
  * export const reducer = reduxEntity.createReducer(
  *  reduxEntity.createCollectionState(),
  *  jobActionTypes
  * );
- * 
+ *
  * // Creating a reducer for a collection of entities (customized case)
  * // job.reducer.js
  * const initialState = reduxEntity.createCollectionState({
