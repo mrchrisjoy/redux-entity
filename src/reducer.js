@@ -1,3 +1,5 @@
+import { filterMacroCaseKeys } from './utils';
+
 /**
  * @module Reducers
  * @example
@@ -160,22 +162,24 @@ export const createReducer = (
   handlers = {},
 ) => (state = initialState, action) => {
   const { type, payload } = action;
+  const filteredActionTypes = filterMacroCaseKeys(actionTypes);
   switch (type) {
-    case actionTypes.ADD_ENTITY:
+    case filteredActionTypes.ADD_ENTITY:
       return addEntity(state, payload);
-    case actionTypes.ADD_ENTITIES:
+    case filteredActionTypes.ADD_ENTITIES:
       return addEntities(state, payload);
-    case actionTypes.REMOVE_ENTITY:
+    case filteredActionTypes.REMOVE_ENTITY:
       return removeEntity(state, payload);
-    case actionTypes.REMOVE_ENTITIES:
+    case filteredActionTypes.REMOVE_ENTITIES:
       return removeEntities(state, payload);
     case actionTypes.REMOVE_SELECTED_ENTITY:
       return removeSelectedEntity(state, payload);
     case actionTypes.ADD_META:
+    case filteredActionTypes.ADD_META:
       return addMeta(state, payload);
-    case actionTypes.SELECT:
+    case filteredActionTypes.SELECT:
       return select(state, payload);
-    case actionTypes.RESET:
+    case filteredActionTypes.RESET:
       return reset(state, initialState);
     default:
       return Object.prototype.hasOwnProperty.call(handlers, type)

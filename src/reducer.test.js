@@ -1,19 +1,21 @@
 /* global describe, it, expect */
-import * as reducer from './reducer';
+import { createActions } from './action';
 import { createCollectionState } from './factory';
-
-const initialState = createCollectionState({
-  entities: {
-    1: { id: '1' },
-    2: { id: '2' },
-    3: { id: '3' },
-    4: { id: '4' },
-    5: { id: '5' },
-  },
-  selectedEntityId: '1',
-});
+import { camelToMacroCase } from './utils';
+import * as reducer from './reducer';
 
 describe('reducer.js', () => {
+  const initialState = createCollectionState({
+    entities: {
+      1: { id: '1' },
+      2: { id: '2' },
+      3: { id: '3' },
+      4: { id: '4' },
+      5: { id: '5' },
+    },
+    selectedEntityId: '1',
+  });
+
   describe('addEntity', () => {
     it('should add new entity', () => {
       const payload = { id: '6' };
@@ -170,12 +172,12 @@ describe('reducer.js', () => {
       const reducerFunction = reducer.createReducer(initialState, actionTypes);
       const payload = { id: 6, name: 'Bob Cutlass' };
       const action = { type: actionTypes.ADD_ENTITY, payload };
-      const newState = reducerFunction(initialState, action);
-      expect(newState.entities).toMatchObject({
+      const reducedState = reducerFunction(initialState, action);
+      expect(reducedState.entities).toMatchObject({
         ...initialState.entities, ...{ [payload.id]: payload },
       });
-      expect(newState.entities[payload.id]).toMatchObject(payload);
-      expect(Object.keys(newState.entities).length).toBe(6);
+      expect(reducedState.entities[payload.id]).toMatchObject(payload);
+      expect(Object.keys(reducedState.entities).length).toBe(6);
     });
 
     it('should reduce state using a custom action', () => {
@@ -188,34 +190,59 @@ describe('reducer.js', () => {
       const reducerFunction = reducer.createReducer(initialState, actionTypes, handlers);
       const payload = { id: 6, name: 'Bob Cutlass' };
       const action = { type: actionTypes.CUSTOM_ACTION, payload };
-      const newState = reducerFunction(initialState, action);
-      expect(newState.custom).toMatchObject(payload);
-      expect(newState.entities).toMatchObject(initialState.entities);
+      const reducedState = reducerFunction(initialState, action);
+      expect(reducedState.custom).toMatchObject(payload);
+      expect(reducedState.entities).toMatchObject(initialState.entities);
     });
 
-    it('should reduce state using both simple & custom actions', () => {
-      const actionTypes = {
-        ADD_ENTITY: '[Collection] Add Entity',
-        CUSTOM_ACTION: '[Collection] Custom Action',
-      };
-      const handlers = {
-        [actionTypes.CUSTOM_ACTION]: (state, { payload }) => ({
-          ...state, custom: payload,
-        }),
-      };
-      const reducerFunction = reducer.createReducer(initialState, actionTypes, handlers);
-      const payload = { id: 6, name: 'Bob Cutlass' };
-      const addEntityState = reducerFunction(initialState, {
-        type: actionTypes.ADD_ENTITY, payload,
+    it('should reduce state using createActions helper', () => {
+      const { types, creators } = createActions('collection', [
+        'addEntity',
+        'addEntities',
+        'removeEntity',
+        'addMeta',
+      ]);
+      const state = createCollectionState();
+      const reducerFunction = reducer.createReducer(state, types, creators);
+      const creatorKeys = Object.keys(creators);
+      creatorKeys.forEach((creator) => {
+        const type = types[camelToMacroCase(creator)];
+        const payload = { id: 6, name: 'Bob Cutlass' };
+        const action = { type, payload };
+        const reducedState = reducerFunction(state, action);
+        const expectedState = reducer[creator](state, payload);
+        expect(reducedState).toMatchObject(expectedState);
       });
-      const customActionState = reducerFunction(addEntityState, {
-        type: actionTypes.CUSTOM_ACTION, payload,
+    });
+
+    it('should reduce state using mixed actions via createActions', () => {
+      const { types } = createActions('collection', ['removeEntities', 'select', 'reset', 'custom']);
+      const reducerFunction = reducer.createReducer(initialState, types, {
+        [types.CUSTOM]: (state, { payload }) => ({ ...state, custom: payload }),
       });
-      const expectEntities = { ...initialState.entities, ...{ [payload.id]: payload } };
-      expect(addEntityState.entities).toMatchObject(expectEntities);
-      expect(addEntityState.custom).toBeUndefined();
-      expect(customActionState.entities).toMatchObject(expectEntities);
-      expect(customActionState.custom).toMatchObject(payload);
+      expect(reducerFunction(undefined, {
+        type: types.REMOVE_ENTITIES,
+        payload: [1, 2, 3, 4, 5],
+      })).toMatchObject(Object.assign({}, initialState, { entities: {} }));
+      expect(reducerFunction(initialState, {
+        type: types.SELECT,
+        payload: '1',
+      })).toMatchObject(Object.assign({}, initialState, { selectedEntityId: '1' }));
+      expect(reducerFunction(Object.assign({}, initialState, { selectedEntityId: '1' }), {
+        type: types.RESET,
+        payload: initialState,
+      })).toMatchObject(initialState);
+      expect(reducerFunction(initialState, {
+        type: types.CUSTOM,
+        payload: 'test',
+      })).toMatchObject({
+        ...initialState,
+        custom: 'test',
+      });
+      expect(reducerFunction(initialState, {
+        type: '[Custom] Unknown Type',
+        payload: 'test',
+      })).toMatchObject(initialState);
     });
   });
 });

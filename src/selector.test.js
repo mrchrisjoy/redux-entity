@@ -1,8 +1,8 @@
 /* global describe, it, expect */
+import { createCollectionState } from './factory';
 import * as selector from './selector';
-import * as factory from './factory';
 
-const initialState = factory.createCollectionState({
+const initialState = createCollectionState({
   entities: {
     1: { id: '1' },
     2: { id: '2' },

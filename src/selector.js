@@ -14,7 +14,7 @@ export const getEntities = state => state.entities;
  * @param {function} compareFunction Comparator used to compare two objects.
  * @example
  * import {getEntitiesArray} from '@foundcareers/redux-entity';
- * 
+ *
  * const todoState = {
  *  entities: {
  *    'be9a-a25d21033a20': {
@@ -35,11 +35,11 @@ export const getEntities = state => state.entities;
  *  },
  *  selectedEntityId: 'be9a-a245gf2033a20'
  * };
- * 
+ *
  * const compareFunction = (a, b) => a.value.localeCompare(b.value);
- * 
+ *
  * const entities = getEntitiesArray(todoState, compareFunction);
- * 
+ *
  * // Resulting in the following entities array
  * [
  *  {

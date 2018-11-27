@@ -1,3 +1,5 @@
+import { camelToMacroCase, camelToTitleCase } from './utils';
+
 const defaultConfig = [
   'addEntity',
   'addEntities',
@@ -9,31 +11,19 @@ const defaultConfig = [
   'reset',
 ];
 
-const parseToTitleCase = str => str
-  .replace(/([A-Z])/g, ' $1')
-  .replace(/\w\S*/g, txt => `${txt.charAt(0).toUpperCase()}${txt.substr(1).toLowerCase()}`);
-
-const parseToMacroCase = str => str
-  .replace(/([A-Z])/g, '_$1')
-  .toUpperCase();
-
 const createTypes = (namespace, config) => config.reduce((accumulator, action) => ({
-  [parseToMacroCase(action)]: `[${parseToTitleCase(namespace)}] ${parseToTitleCase(action)}`,
+  [camelToMacroCase(action)]: `[${camelToTitleCase(namespace)}] ${camelToTitleCase(action)}`,
   ...accumulator,
 }), {});
 
 const createCreators = (types, config) => config.reduce((accumulator, action) => ({
-  [action]: payload => ({ type: types[parseToMacroCase(action)], payload }),
+  [action]: payload => ({ type: types[camelToMacroCase(action)], payload }),
   ...accumulator,
 }), {});
 
-export const filterActionTypes = actions => Object.keys(actions)
-  .filter(action => action.match(new RegExp(/^([A-Z])+(_)?/, 'g')))
-  .reduce((accumulator, key) => ({ ...accumulator, [key]: actions[key] }), {});
-
 export const createActionsConfig = (config = []) => [...defaultConfig, ...config];
 
-export const createActions = (namespace, config = defaultConfig) => {
+export const createActions = (namespace = 'undefined', config = []) => {
   const types = createTypes(namespace, config);
   const creators = createCreators(types, config);
   return { types, creators };
