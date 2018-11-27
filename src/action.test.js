@@ -28,8 +28,14 @@ describe('action.js', () => {
   });
 
   describe('createActions', () => {
-    // Get random falsy value. P(undefined) = P(null) = 0.5
-    const randomFalsy = Math.random() >= 0.5 ? undefined : null;
+    // Choose random payload
+    const payload = [
+      'test',
+      { custom: 1 },
+      null,
+      undefined,
+      43,
+    ][Math.floor(Math.random() * 5)];
 
     it('should produce empty action types and creators', () => {
       expect(createActions()).toMatchObject({
@@ -52,7 +58,6 @@ describe('action.js', () => {
         ADD_ENTITY: '[Undefined] Add Entity',
       });
       expect(Object.keys(creators).sort()).toEqual(defaultConfig.sort());
-      const payload = randomFalsy;
       creatorKeys.forEach(creator => expect(creators[creator](payload)).toMatchObject({
         type: types[camelToMacroCase(creator)],
         payload,
@@ -73,7 +78,6 @@ describe('action.js', () => {
         ADD_ENTITY: '[Collection] Add Entity',
       });
       expect(creatorKeys.sort()).toEqual(defaultConfig.sort());
-      const payload = randomFalsy;
       creatorKeys.forEach(creator => expect(creators[creator](payload)).toMatchObject({
         type: types[camelToMacroCase(creator)],
         payload,
