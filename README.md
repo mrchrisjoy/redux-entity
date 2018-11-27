@@ -142,7 +142,8 @@ const stateWithStandardPagination = createCollectionState({
    totalPages: 0,
    totalCount: 0
  },
- selectedEntityId: null
+ selectedEntityId: null,
+ previouslySelectedEntityId: null
 }
 
 // State with Cursor Pagination:
@@ -157,7 +158,7 @@ const stateWithMetaPagination = createCollectionState({}, {
    hasNextPage: null,
    startCursor: null
  },
- selectedEntityId: null,  
+ selectedEntityId: null,
 }
 ```
 
@@ -194,10 +195,6 @@ const todoState = {
    'be9a-423mfas5345sd': {
      id: 'be9a-423mfas5345sd',
      value: 'Write todo'
-   },
-   'be9a-a245gf2033a20': {
-     id: 'be9a-a245gf2033a20',
-     value: 'Grill salmon'
    }
  },
  meta: {
@@ -223,10 +220,6 @@ const entities = getEntitiesArray(todoState, compareFunction);
  {
    id: 'be9a-a25d21033a20',
    value: 'Wash clothes'
- },
- {
-   id: 'be9a-423mfas5345sd',
-   value: 'Write todo'
  }
 ]
 ```
@@ -313,7 +306,7 @@ Adds entities to the collection state.
 #### Parameters
 
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The collection of entities you would
+-   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing entities you'd like to add to the collection.
 
 ### removeEntity
 
@@ -322,7 +315,7 @@ Remove an entity from the collection state.
 #### Parameters
 
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `id` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Entity's id you'd like to remove from the collection state.
+-   `id` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Id of entity you'd like to remove from the collection state.
 
 ### removeEntities
 
@@ -357,7 +350,7 @@ Select an entity in the collection state.
 #### Parameters
 
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Entity Id that's being selected.
+-   `selectedEntityId` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Entity Id that's being selected.
 
 ### reset
 

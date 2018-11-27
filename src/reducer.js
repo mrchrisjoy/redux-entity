@@ -172,9 +172,8 @@ export const createReducer = (
       return removeEntity(state, payload);
     case filteredActionTypes.REMOVE_ENTITIES:
       return removeEntities(state, payload);
-    case actionTypes.REMOVE_SELECTED_ENTITY:
+    case filteredActionTypes.REMOVE_SELECTED_ENTITY:
       return removeSelectedEntity(state, payload);
-    case actionTypes.ADD_META:
     case filteredActionTypes.ADD_META:
       return addMeta(state, payload);
     case filteredActionTypes.SELECT:
