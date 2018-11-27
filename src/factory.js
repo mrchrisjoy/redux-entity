@@ -40,7 +40,8 @@ const createMetaData = useCursor =>
  *    totalPages: 0,
  *    totalCount: 0
  *  },
- *  selectedEntityId: null
+ *  selectedEntityId: null,
+ *  previouslySelectedEntityId: null
  * }
  * 
  * // State with Cursor Pagination:
