@@ -4,7 +4,7 @@
  */
 
 /**
- * Convert strings in camelCase to Title Case.
+ * Convert string from camelCase to Title Case.
  * @memberof Utils
  * @param {string} str String to be converted
  * @private
@@ -14,7 +14,7 @@ export const camelToTitleCase = str => str
   .replace(/\w\S*/g, txt => `${txt.charAt(0).toUpperCase()}${txt.substr(1).toLowerCase()}`);
 
 /**
- * Convert strings in camelCase to MACRO_CASE.
+ * Convert string from camelCase to MACRO_CASE.
  * @memberof Utils
  * @param {string} str String to be converted
  * @private

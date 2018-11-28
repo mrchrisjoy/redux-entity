@@ -5,11 +5,11 @@
   "main": "src/index.js",
   "scripts": {
     "commit": "git-cz",
-    "docs": "npm run docs:build",
+    "docs": "npm run docs:validate && npm run docs:build",
     "docs:build": "documentation readme src/**  --section=Documentation --shallow",
     "docs:validate": "documentation lint src/**",
     "lint": "eslint --quiet src",
-    "pre-commit": "npm run test && npm run docs:validate && npm run lint",
+    "pre-commit": "npm run test && npm run docs && npm run lint",
     "semantic-release": "semantic-release",
     "test": "jest",
     "test:coverage": "jest --coverage",
