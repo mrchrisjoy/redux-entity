@@ -1,11 +1,13 @@
+import { filterMacroCaseKeys } from './utils';
+
 /**
  * @module Reducers
  * @example
  * import * as reduxEntity from '@foundcareers/redux-entity';
  * import * as action from '../actions/todo.js';
- * 
+ *
  * const initialState = reduxEntity.createCollectionState();
- * 
+ *
  * export const reducer = (state = initialState, {type, payload}) => {
  *  switch (type) {
  *    case action.ADD_ENTITY:
@@ -30,34 +32,36 @@
  * };
  */
 
-/** 
+/**
  * Add an entity to the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {Object} payload The entity object you'd like to add. Must contain an `id` attribute
+ * @param {Object} payload The entity object you'd like to add. Must contain an `id` attribute.
  */
-export const addEntity = (state, payload) =>
-  ({...state, entities: {...state.entities, [payload.id]: payload}});
+export const addEntity = (state, payload) => ({
+  ...state, entities: { ...state.entities, [payload.id]: payload },
+});
 
 /**
  * Adds entities to the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {Object} payload The collection of entities you would 
+ * @param {Object} payload Object containing entities you'd like to add to the collection.
  */
-export const addEntities = (state, payload) => 
-  ({...state, entities: {...state.entities, ...payload}});
+export const addEntities = (state, payload) => ({
+  ...state, entities: { ...state.entities, ...payload },
+});
 
 /**
  * Remove an entity from the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {string} id Entity's id you'd like to remove from the collection state.
+ * @param {string} id Id of entity you'd like to remove from the collection state.
  */
 export const removeEntity = (state, id) => {
   const entities = Object.assign({}, state.entities);
   delete entities[id];
-  return {...state, entities};
+  return { ...state, entities };
 };
 
 /**
@@ -68,8 +72,8 @@ export const removeEntity = (state, id) => {
  */
 export const removeEntities = (state, ids) => {
   const entities = Object.assign({}, state.entities);
-  ids.forEach(id => delete entities[id])
-  return {...state, entities};
+  ids.forEach(id => delete entities[id]);
+  return { ...state, entities };
 };
 
 /**
@@ -77,8 +81,9 @@ export const removeEntities = (state, ids) => {
  * @memberof Reducers
  * @param {Object} state Collection state.
  */
-export const removeSelectedEntity = (state) =>
-  ({...state, selectedEntityId: null});
+export const removeSelectedEntity = state => ({
+  ...state, selectedEntityId: null,
+});
 
 /**
  * Add a meta object to the collection state.
@@ -86,17 +91,19 @@ export const removeSelectedEntity = (state) =>
  * @param {Object} state Collection state.
  * @param {Object} payload The meta object.
  */
-export const addMeta = (state, payload) =>
-  ({...state, meta: {...payload}});
+export const addMeta = (state, payload) => ({
+  ...state, meta: { ...payload },
+});
 
 /**
  * Select an entity in the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {Object} payload Entity Id that's being selected.
+ * @param {Object} selectedEntityId Entity Id that's being selected.
  */
-export const select = (state, payload) =>
-  ({...state, selectedEntityId: payload});
+export const select = (state, selectedEntityId) => ({
+  ...state, selectedEntityId,
+});
 
 /**
  * Reset the collection state.
@@ -104,8 +111,9 @@ export const select = (state, payload) =>
  * @param {Object} state Current Collection state.
  * @param {Object} initialState Initial Collection state (refer to `createCollectionState`).
  */
-export const reset = (state, initialState) => 
-  ({...state, ...initialState});
+export const reset = (state, initialState) => ({
+  ...state, ...initialState,
+});
 
 /**
  * Helper function used to create a reducer function.
@@ -121,14 +129,14 @@ export const reset = (state, initialState) =>
  *  CUSTOM: '[Job] Custom'
  *  ...
  * }
- * 
+ *
  * // Creating a reducer for a collection of entities (default case)
  * // job.reducer.js
  * export const reducer = reduxEntity.createReducer(
  *  reduxEntity.createCollectionState(),
  *  jobActionTypes
  * );
- * 
+ *
  * // Creating a reducer for a collection of entities (customized case)
  * // job.reducer.js
  * const initialState = reduxEntity.createCollectionState({
@@ -151,28 +159,29 @@ export const reset = (state, initialState) =>
 export const createReducer = (
   initialState,
   actionTypes,
-  handlers = {}
+  handlers = {},
 ) => (state = initialState, action) => {
-  const {type, payload} = action;
+  const { type, payload } = action;
+  const filteredActionTypes = filterMacroCaseKeys(actionTypes);
   switch (type) {
-    case actionTypes.ADD_ENTITY:
+    case filteredActionTypes.ADD_ENTITY:
       return addEntity(state, payload);
-    case actionTypes.ADD_ENTITIES:
+    case filteredActionTypes.ADD_ENTITIES:
       return addEntities(state, payload);
-    case actionTypes.REMOVE_ENTITY:
+    case filteredActionTypes.REMOVE_ENTITY:
       return removeEntity(state, payload);
-    case actionTypes.REMOVE_ENTITIES:
+    case filteredActionTypes.REMOVE_ENTITIES:
       return removeEntities(state, payload);
-    case actionTypes.REMOVE_SELECTED_ENTITY:
+    case filteredActionTypes.REMOVE_SELECTED_ENTITY:
       return removeSelectedEntity(state, payload);
-    case actionTypes.ADD_META:
+    case filteredActionTypes.ADD_META:
       return addMeta(state, payload);
-    case actionTypes.SELECT:
+    case filteredActionTypes.SELECT:
       return select(state, payload);
-    case actionTypes.RESET:
+    case filteredActionTypes.RESET:
       return reset(state, initialState);
-    default: 
-      return handlers.hasOwnProperty(type) ?
-        handlers[type](state, action) : state
+    default:
+      return Object.prototype.hasOwnProperty.call(handlers, type)
+        ? handlers[type](state, action) : state;
   }
 };

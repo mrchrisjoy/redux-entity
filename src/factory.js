@@ -1,9 +1,10 @@
 /** @module Factories */
+/* eslint-disable import/prefer-default-export */
 
 const createCursorMeta = () => ({
   endCursor: null,
   hasNextPage: null,
-  startCursor: null
+  startCursor: null,
 });
 
 const createDefaultMeta = () => ({
@@ -14,8 +15,7 @@ const createDefaultMeta = () => ({
   totalCount: 0,
 });
 
-const createMetaData = useCursor => 
-  useCursor ? createCursorMeta() : createDefaultMeta();
+const createMetaData = useCursor => (useCursor ? createCursorMeta() : createDefaultMeta());
 
 /**
  * Creates an initial collection state object with standard or cursor meta.
@@ -25,7 +25,7 @@ const createMetaData = useCursor =>
  * @param {boolean} options.useCursor Set to `true` to use cursor meta.
  * @example
  * import {createCollectionState} from '@foundcareers/redux-entity';
- * 
+ *
  * // State with Standard Pagination:
  * const stateWithStandardPagination = createCollectionState({
  *  previouslySelectedEntityId: null,
@@ -43,7 +43,7 @@ const createMetaData = useCursor =>
  *  selectedEntityId: null,
  *  previouslySelectedEntityId: null
  * }
- * 
+ *
  * // State with Cursor Pagination:
  * const stateWithMetaPagination = createCollectionState({}, {
  *  useCursor: true
@@ -56,12 +56,12 @@ const createMetaData = useCursor =>
  *    hasNextPage: null,
  *    startCursor: null
  *  },
- *  selectedEntityId: null,  
+ *  selectedEntityId: null,
  * }
  */
-export const createCollectionState = (state, options={}) => ({
+export const createCollectionState = (state, options = {}) => ({
   entities: {},
   meta: createMetaData(options.useCursor),
   selectedEntityId: null,
-  ...state
+  ...state,
 });
