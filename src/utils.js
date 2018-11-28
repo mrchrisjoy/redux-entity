@@ -1,9 +1,12 @@
-/** @module Utils */
+/**
+ * @module Utils
+ * @private
+ */
 
 /**
  * Convert strings in camelCase to Title Case.
  * @memberof Utils
- * @param {*} str String to be converted
+ * @param {string} str String to be converted
  * @private
  */
 export const camelToTitleCase = str => str
@@ -13,7 +16,7 @@ export const camelToTitleCase = str => str
 /**
  * Convert strings in camelCase to MACRO_CASE.
  * @memberof Utils
- * @param {*} str String to be converted
+ * @param {string} str String to be converted
  * @private
  */
 export const camelToMacroCase = str => str
@@ -23,7 +26,7 @@ export const camelToMacroCase = str => str
 /**
  * Reduce an object omitting non-MACRO_CASE keys.
  * @memberof Utils
- * @param {*} object Object that needs to be reduced.
+ * @param {Object} object Object that needs to be reduced.
  * @private
  */
 export const filterMacroCaseKeys = object => Object.keys(object)

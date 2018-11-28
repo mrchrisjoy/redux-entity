@@ -36,7 +36,7 @@ import { filterMacroCaseKeys } from './utils';
  * Add an entity to the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {Object} payload The entity object you'd like to add. Must contain an `id` attribute
+ * @param {Object} payload The entity object you'd like to add. Must contain an `id` attribute.
  */
 export const addEntity = (state, payload) => ({
   ...state, entities: { ...state.entities, [payload.id]: payload },

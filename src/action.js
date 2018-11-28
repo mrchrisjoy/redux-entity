@@ -43,7 +43,7 @@ const createCreators = (types, config) => config.reduce((accumulator, action) =>
  * @example
  * const config = createActionsConfig(['fetch', 'delete'])
  *
- * Output:
+ * // config
  * [
  *    'addEntity',
  *    'addEntities',

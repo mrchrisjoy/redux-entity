@@ -96,7 +96,6 @@ Here's an example store that works with `@foundcareers/redux-entity`.
         -   [Parameters](#parameters-7)
     -   [getPrevPage](#getprevpage)
         -   [Parameters](#parameters-8)
--   [Utils](#utils)
 -   [Reducers](#reducers)
     -   [Examples](#examples-4)
     -   [addEntity](#addentity)
@@ -134,7 +133,7 @@ Helper used to create action config array.
 ```javascript
 const config = createActionsConfig(['fetch', 'delete'])
 
-Output:
+// config
 [
    'addEntity',
    'addEntities',
@@ -322,8 +321,6 @@ Get previous page from a collection state.
 
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
 
-## Utils
-
 ## Reducers
 
 ### Examples
@@ -365,7 +362,7 @@ Add an entity to the collection state.
 #### Parameters
 
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The entity object you'd like to add. Must contain an `id` attribute
+-   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The entity object you'd like to add. Must contain an `id` attribute.
 
 ### addEntities
 
