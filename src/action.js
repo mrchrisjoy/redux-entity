@@ -15,8 +15,8 @@ const defaultConfig = [
 /**
  * Helper used to create action types.
  * @memberof Actions
- * @param {*} namespace Suffix for action types in camelCase.
- * @param {*} config Array of strings in camelCase.
+ * @param {string} namespace Suffix for action types in camelCase.
+ * @param {string[]} config Array of strings in camelCase.
  * @private
  */
 const createTypes = (namespace, config) => config.reduce((accumulator, action) => ({
@@ -27,8 +27,8 @@ const createTypes = (namespace, config) => config.reduce((accumulator, action) =
 /**
  * Helper used to create action creator functions.
  * @memberof Actions
- * @param {*} types Action types object (see Actions::createTypes).
- * @param {*} config Array of strings in camelCase.
+ * @param {Object} types Action types object (see Actions::createTypes).
+ * @param {string[]} config Array of strings in camelCase.
  * @private
  */
 const createCreators = (types, config) => config.reduce((accumulator, action) => ({
@@ -61,20 +61,20 @@ const createCreators = (types, config) => config.reduce((accumulator, action) =>
 export const createActionsConfig = (config = []) => [...defaultConfig, ...config];
 
 /**
- * Helper used to create actions objects (including action types and creators).
+ * Helper used to create action objects (including action types and creators).
  * @memberof Actions
  * @param {string} namespace Suffix for action types in camelCase.
  * @param {string[]} config Array of strings in camelCase.
  * @example
  * const { types, creators } = createActions('collection', ['addEntity', 'removeEntity']);
  *
- * // Types
+ * // types
  * {
  *  REMOVE_ENTITY: '[Collection] Remove Entity',
  *  ADD_ENTITY: '[Collection] Add Entity'
  * }
  *
- * // Creators
+ * // creators
  * {
  *  removeEntity: payload => ({ type: '[Collection] Remove Entity', payload }),
  *  addEntity: payload => ({ type: '[Collection] Add Entity', payload })

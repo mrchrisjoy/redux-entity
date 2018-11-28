@@ -152,7 +152,7 @@ Output:
 
 ### createActions
 
-Helper used to create actions objects (including action types and creators).
+Helper used to create action objects (including action types and creators).
 
 #### Parameters
 
@@ -164,13 +164,13 @@ Helper used to create actions objects (including action types and creators).
 ```javascript
 const { types, creators } = createActions('collection', ['addEntity', 'removeEntity']);
 
-// Types
+// types
 {
  REMOVE_ENTITY: '[Collection] Remove Entity',
  ADD_ENTITY: '[Collection] Add Entity'
 }
 
-// Creators
+// creators
 {
  removeEntity: payload => ({ type: '[Collection] Remove Entity', payload }),
  addEntity: payload => ({ type: '[Collection] Add Entity', payload })

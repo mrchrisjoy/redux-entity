@@ -21,7 +21,7 @@ export const camelToMacroCase = str => str
   .toUpperCase();
 
 /**
- * Reduce an object omitting non MACRO_CASE keys.
+ * Reduce an object omitting non-MACRO_CASE keys.
  * @memberof Utils
  * @param {*} object Object that needs to be reduced.
  * @private
