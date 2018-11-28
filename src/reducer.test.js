@@ -216,22 +216,31 @@ describe('reducer.js', () => {
     });
 
     it('should reduce state using mixed actions via createActions', () => {
-      const { types } = createActions('collection', ['removeEntities', 'select', 'reset', 'custom']);
+      const { types } = createActions('collection', ['removeEntities', 'removeSelectedEntity', 'select', 'reset', 'custom']);
       const reducerFunction = reducer.createReducer(initialState, types, {
         [types.CUSTOM]: (state, { payload }) => ({ ...state, custom: payload }),
       });
+      // Remove entities
       expect(reducerFunction(undefined, {
         type: types.REMOVE_ENTITIES,
         payload: [1, 2, 3, 4, 5],
       })).toMatchObject(Object.assign({}, initialState, { entities: {} }));
+      // Remove selected entity
+      expect(reducerFunction(initialState, {
+        type: types.REMOVE_SELECTED_ENTITY,
+        payload: '1',
+      })).toMatchObject(Object.assign({}, initialState, { selectedEntityId: null }));
+      // Select
       expect(reducerFunction(initialState, {
         type: types.SELECT,
         payload: '1',
       })).toMatchObject(Object.assign({}, initialState, { selectedEntityId: '1' }));
+      // Reset
       expect(reducerFunction(Object.assign({}, initialState, { selectedEntityId: '1' }), {
         type: types.RESET,
         payload: initialState,
       })).toMatchObject(initialState);
+      // Custom
       expect(reducerFunction(initialState, {
         type: types.CUSTOM,
         payload: 'test',
@@ -239,6 +248,7 @@ describe('reducer.js', () => {
         ...initialState,
         custom: 'test',
       });
+      // Custom unknown type
       expect(reducerFunction(initialState, {
         type: '[Custom] Unknown Type',
         payload: 'test',
