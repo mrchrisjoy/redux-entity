@@ -59,7 +59,7 @@ const createMetaData = useCursor => (useCursor ? createCursorMeta() : createDefa
  *  selectedEntityId: null,
  * }
  */
-export const createCollectionState = (state, options = {}) => ({
+export const createCollectionState = (state = {}, options = {}) => ({
   entities: {},
   meta: createMetaData(options.useCursor),
   selectedEntityId: null,
