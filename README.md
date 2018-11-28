@@ -71,45 +71,111 @@ Here's an example store that works with `@foundcareers/redux-entity`.
 
 ### Table of Contents
 
--   [Factories](#factories)
-    -   [createCollectionState](#createcollectionstate)
+-   [Actions](#actions)
+    -   [createActionsConfig](#createactionsconfig)
         -   [Parameters](#parameters)
         -   [Examples](#examples)
+    -   [createActions](#createactions)
+        -   [Parameters](#parameters-1)
+        -   [Examples](#examples-1)
+-   [Factories](#factories)
+    -   [createCollectionState](#createcollectionstate)
+        -   [Parameters](#parameters-2)
+        -   [Examples](#examples-2)
 -   [Selectors](#selectors)
     -   [getEntities](#getentities)
-        -   [Parameters](#parameters-1)
-    -   [getEntitiesArray](#getentitiesarray)
-        -   [Parameters](#parameters-2)
-        -   [Examples](#examples-1)
-    -   [getSelectedEntityId](#getselectedentityid)
         -   [Parameters](#parameters-3)
-    -   [getMeta](#getmeta)
+    -   [getEntitiesArray](#getentitiesarray)
         -   [Parameters](#parameters-4)
-    -   [getNextPage](#getnextpage)
-        -   [Parameters](#parameters-5)
-    -   [getPrevPage](#getprevpage)
-        -   [Parameters](#parameters-6)
--   [Reducers](#reducers)
-    -   [Examples](#examples-2)
-    -   [addEntity](#addentity)
-        -   [Parameters](#parameters-7)
-    -   [addEntities](#addentities)
-        -   [Parameters](#parameters-8)
-    -   [removeEntity](#removeentity)
-        -   [Parameters](#parameters-9)
-    -   [removeEntities](#removeentities)
-        -   [Parameters](#parameters-10)
-    -   [removeSelectedEntity](#removeselectedentity)
-        -   [Parameters](#parameters-11)
-    -   [addMeta](#addmeta)
-        -   [Parameters](#parameters-12)
-    -   [select](#select)
-        -   [Parameters](#parameters-13)
-    -   [reset](#reset)
-        -   [Parameters](#parameters-14)
-    -   [createReducer](#createreducer)
-        -   [Parameters](#parameters-15)
         -   [Examples](#examples-3)
+    -   [getSelectedEntityId](#getselectedentityid)
+        -   [Parameters](#parameters-5)
+    -   [getMeta](#getmeta)
+        -   [Parameters](#parameters-6)
+    -   [getNextPage](#getnextpage)
+        -   [Parameters](#parameters-7)
+    -   [getPrevPage](#getprevpage)
+        -   [Parameters](#parameters-8)
+-   [Utils](#utils)
+-   [Reducers](#reducers)
+    -   [Examples](#examples-4)
+    -   [addEntity](#addentity)
+        -   [Parameters](#parameters-9)
+    -   [addEntities](#addentities)
+        -   [Parameters](#parameters-10)
+    -   [removeEntity](#removeentity)
+        -   [Parameters](#parameters-11)
+    -   [removeEntities](#removeentities)
+        -   [Parameters](#parameters-12)
+    -   [removeSelectedEntity](#removeselectedentity)
+        -   [Parameters](#parameters-13)
+    -   [addMeta](#addmeta)
+        -   [Parameters](#parameters-14)
+    -   [select](#select)
+        -   [Parameters](#parameters-15)
+    -   [reset](#reset)
+        -   [Parameters](#parameters-16)
+    -   [createReducer](#createreducer)
+        -   [Parameters](#parameters-17)
+        -   [Examples](#examples-5)
+
+## Actions
+
+### createActionsConfig
+
+Helper used to create action config array.
+
+#### Parameters
+
+-   `config` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** Custom action config array. (optional, default `[]`)
+
+#### Examples
+
+```javascript
+const config = createActionsConfig(['fetch', 'delete'])
+
+Output:
+[
+   'addEntity',
+   'addEntities',
+   'removeEntity',
+   'removeEntities',
+   'removeSelectedEntity',
+   'addMeta',
+   'select',
+   'reset',
+   // Custom config
+   'fetch',
+   'delete'
+]
+```
+
+### createActions
+
+Helper used to create actions objects (including action types and creators).
+
+#### Parameters
+
+-   `namespace` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Suffix for action types in camelCase. (optional, default `'undefined'`)
+-   `config` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** Array of strings in camelCase. (optional, default `[]`)
+
+#### Examples
+
+```javascript
+const { types, creators } = createActions('collection', ['addEntity', 'removeEntity']);
+
+// Types
+{
+ REMOVE_ENTITY: '[Collection] Remove Entity',
+ ADD_ENTITY: '[Collection] Add Entity'
+}
+
+// Creators
+{
+ removeEntity: payload => ({ type: '[Collection] Remove Entity', payload }),
+ addEntity: payload => ({ type: '[Collection] Add Entity', payload })
+}
+```
 
 ## Factories
 
@@ -255,6 +321,8 @@ Get previous page from a collection state.
 #### Parameters
 
 -   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+
+## Utils
 
 ## Reducers
 
