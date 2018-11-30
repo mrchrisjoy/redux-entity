@@ -1,7 +1,6 @@
 /** @module Reducers */
 import { filterMacroCaseKeys } from './utils';
 
-
 /**
  * Add an entity to the collection state.
  * @memberof Reducers
@@ -86,6 +85,26 @@ export const reset = (state, initialState) => ({
 });
 
 /**
+ * Creates a object literal of action types and their corresponding reducer
+ * functions. Returns the selected reducer function. This is used to replace
+ * the switch statement in the createReducer function, thus improving
+ * the time complexity. O(|actionTypes|) ~> O(1).
+ * @memberof Reducers
+ * @param {Object} actionTypes Object containing required action types.
+ * @private
+ */
+const selectReducer = (actionTypes, selectedType) => ({
+  [actionTypes.ADD_ENTITY]: addEntity,
+  [actionTypes.ADD_ENTITIES]: addEntities,
+  [actionTypes.REMOVE_ENTITY]: removeEntity,
+  [actionTypes.REMOVE_ENTITIES]: removeEntities,
+  [actionTypes.REMOVE_SELECTED_ENTITY]: removeSelectedEntity,
+  [actionTypes.ADD_META]: addMeta,
+  [actionTypes.SELECT]: select,
+  [actionTypes.RESET]: reset,
+})[selectedType];
+
+/**
  * Creates an returns a custom reducer function.
  * @memberof Reducers
  * @param {Object} initialState Collection state.
@@ -127,26 +146,9 @@ export const createReducer = (
   handlers = {},
 ) => (state = initialState, action) => {
   const { type, payload } = action;
-  const filteredActionTypes = filterMacroCaseKeys(actionTypes);
-  switch (type) {
-    case filteredActionTypes.ADD_ENTITY:
-      return addEntity(state, payload);
-    case filteredActionTypes.ADD_ENTITIES:
-      return addEntities(state, payload);
-    case filteredActionTypes.REMOVE_ENTITY:
-      return removeEntity(state, payload);
-    case filteredActionTypes.REMOVE_ENTITIES:
-      return removeEntities(state, payload);
-    case filteredActionTypes.REMOVE_SELECTED_ENTITY:
-      return removeSelectedEntity(state);
-    case filteredActionTypes.ADD_META:
-      return addMeta(state, payload);
-    case filteredActionTypes.SELECT:
-      return select(state, payload);
-    case filteredActionTypes.RESET:
-      return reset(state, initialState);
-    default:
-      return Object.prototype.hasOwnProperty.call(handlers, type)
-        ? handlers[type](state, action) : state;
-  }
+  const reducer = selectReducer(filterMacroCaseKeys(actionTypes), type);
+  return (reducer && reducer(state, payload)) || (
+    Object.prototype.hasOwnProperty.call(handlers, type)
+      ? handlers[type](state, action) : state
+  );
 };

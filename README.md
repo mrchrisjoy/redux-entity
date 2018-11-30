@@ -108,9 +108,13 @@ Here's an example store that works with `@foundcareers/redux-entity`.
         -   [Parameters](#parameters-15)
     -   [getPrevPage](#getprevpage)
         -   [Parameters](#parameters-16)
+    -   [getStartCursor](#getstartcursor)
+        -   [Parameters](#parameters-17)
+    -   [getEndCursor](#getendcursor)
+        -   [Parameters](#parameters-18)
 -   [Factories](#factories)
     -   [createCollectionState](#createcollectionstate)
-        -   [Parameters](#parameters-17)
+        -   [Parameters](#parameters-19)
         -   [Examples](#examples-4)
 
 ## Actions
@@ -373,7 +377,7 @@ Get meta from a collection state.
 
 ### getNextPage
 
-Get next page from a collection state.
+Get next page from a collection meta.
 
 #### Parameters
 
@@ -381,7 +385,23 @@ Get next page from a collection state.
 
 ### getPrevPage
 
-Get previous page from a collection state.
+Get previous page from a collection meta.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+
+### getStartCursor
+
+Get start cursor from a collection meta.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+
+### getEndCursor
+
+Get end cursor from a collection state.
 
 #### Parameters
 

@@ -71,15 +71,29 @@ export const getSelectedEntityId = state => state.selectedEntityId;
 export const getMeta = state => state.meta;
 
 /**
- * Get next page from a collection state.
+ * Get next page from a collection meta.
  * @memberof Selectors
  * @param {Object} state Collection state.
  */
 export const getNextPage = state => state.meta.nextPage;
 
 /**
- * Get previous page from a collection state.
+ * Get previous page from a collection meta.
  * @memberof Selectors
  * @param {Object} state Collection state.
  */
 export const getPrevPage = state => state.meta.prevPage;
+
+/**
+ * Get start cursor from a collection meta.
+ * @memberof Selectors
+ * @param {Object} state Collection state.
+ */
+export const getStartCursor = state => state.meta.startCursor;
+
+/**
+ * Get end cursor from a collection state.
+ * @memberof Selectors
+ * @param {Object} state Collection state.
+ */
+export const getEndCursor = state => state.meta.endCursor;
