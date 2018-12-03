@@ -87,8 +87,7 @@ export const reset = (state, initialState) => ({
 /**
  * Creates a object literal of action types and their corresponding reducer
  * functions. Returns the selected reducer function. This is used to replace
- * the switch statement in the createReducer function, thus improving
- * the time complexity. O(|actionTypes|) ~> O(1).
+ * the switch statement in the createReducer function.
  * @memberof Reducers
  * @param {Object} actionTypes Object containing required action types.
  * @private
