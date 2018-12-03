@@ -30,5 +30,5 @@ export const camelToMacroCase = str => str
  * @private
  */
 export const filterMacroCaseKeys = object => Object.keys(object)
-  .filter(action => action.match(new RegExp(/^([A-Z])+(_)?/, 'g')))
+  .filter(action => action.match(new RegExp(/^([A-Z])+(_)?/g)))
   .reduce((accumulator, key) => ({ ...accumulator, [key]: object[key] }), {});
