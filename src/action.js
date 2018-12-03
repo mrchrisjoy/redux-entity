@@ -13,10 +13,11 @@ const defaultConfig = [
 ];
 
 /**
- * Helper used to create action types.
+ * Creates an action types object using FC's action type namespace convention
+ * (eg. '[Collection] Action').
  * @memberof Actions
- * @param {string} namespace Suffix for action types in camelCase.
- * @param {string[]} config Array of strings in camelCase.
+ * @param {string} namespace Action types namespace in camelCase.
+ * @param {string[]} config Array of strings containing actions in camelCase.
  * @private
  */
 const createTypes = (namespace, config) => config.reduce((accumulator, action) => ({
@@ -25,7 +26,7 @@ const createTypes = (namespace, config) => config.reduce((accumulator, action) =
 }), {});
 
 /**
- * Helper used to create action creator functions.
+ * Creates an object containing action creator functions.
  * @memberof Actions
  * @param {Object} types Action types object (see Actions::createTypes).
  * @param {string[]} config Array of strings in camelCase.
@@ -37,10 +38,12 @@ const createCreators = (types, config) => config.reduce((accumulator, action) =>
 }), {});
 
 /**
- * Helper used to create action config array.
+ * Helps create an actions config (used in Actions::createActions).
  * @memberof Actions
- * @param {string[]} config Custom action config array.
+ * @param {string[]} config Array of strings containing actions in camelCase.
  * @example
+ * import { createActionsConfig } from '@foundcareers/redux-entity';
+ *
  * const config = createActionsConfig(['fetch', 'delete'])
  *
  * // config
@@ -61,12 +64,16 @@ const createCreators = (types, config) => config.reduce((accumulator, action) =>
 export const createActionsConfig = (config = []) => [...defaultConfig, ...config];
 
 /**
- * Helper used to create action objects (including action types and creators).
+ * Creates an object containing action types and creators.
  * @memberof Actions
- * @param {string} namespace Suffix for action types in camelCase.
- * @param {string[]} config Array of strings in camelCase.
+ * @param {string} namespace Action types namespace in camelCase.
+ * @param {string[]} config Array of strings containing actions in camelCase.
  * @example
- * const { types, creators } = createActions('collection', ['addEntity', 'removeEntity']);
+ * import { createActionsConfig } from '@foundcareers/redux-entity';
+ *
+ * const { types, creators } = createActions('collection',
+ *  ['addEntity', 'removeEntity']
+ * );
  *
  * // types
  * {
