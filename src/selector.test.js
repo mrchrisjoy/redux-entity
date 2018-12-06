@@ -79,7 +79,7 @@ describe('selector.js', () => {
   });
 
   describe('getStartCursor', () => {
-    it('should select start cursor from meta', () => {
+    it('should select start cursor from cursor meta', () => {
       const state = createCollectionState({}, { useCursor: true });
       const { meta: { startCursor } } = state;
       const selected = selector.getStartCursor(state);
@@ -88,11 +88,20 @@ describe('selector.js', () => {
   });
 
   describe('getEndCursor', () => {
-    it('should select previous page from meta', () => {
+    it('should select previous page from cursor meta', () => {
       const state = createCollectionState({}, { useCursor: true });
       const { meta: { endCursor } } = state;
       const selected = selector.getEndCursor(state);
       expect(selected).toEqual(endCursor);
+    });
+  });
+
+  describe('hasNextCursor', () => {
+    it('should select has next from cursor meta', () => {
+      const state = createCollectionState({}, { useCursor: true });
+      const { meta: { hasNext } } = state;
+      const selected = selector.hasNextCursor(state);
+      expect(selected).toEqual(hasNext);
     });
   });
 });

@@ -7,7 +7,7 @@
  */
 const createCursorMeta = () => ({
   endCursor: null,
-  hasNextPage: null,
+  hasNext: null,
   startCursor: null,
 });
 

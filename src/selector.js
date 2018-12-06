@@ -97,3 +97,10 @@ export const getStartCursor = state => state.meta.startCursor;
  * @param {Object} state Collection state.
  */
 export const getEndCursor = state => state.meta.endCursor;
+
+/**
+ * Get hasNext within cursor meta from a collection state.
+ * @memberof Selectors
+ * @param {Object} state Collection state.
+ */
+export const hasNextCursor = state => state.meta.hasNext;
