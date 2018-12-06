@@ -21,7 +21,7 @@ describe('factory.js', () => {
       const initialCollectionState = createCollectionState({}, { useCursor: true });
       const initialMetaData = {
         endCursor: null,
-        hasNext: null,
+        hasNextPage: null,
         startCursor: null,
       };
       expect(Object.keys(initialCollectionState).length).toEqual(3);

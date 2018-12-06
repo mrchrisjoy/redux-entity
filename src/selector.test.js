@@ -99,9 +99,9 @@ describe('selector.js', () => {
   describe('hasNextCursor', () => {
     it('should select has next from cursor meta', () => {
       const state = createCollectionState({}, { useCursor: true });
-      const { meta: { hasNext } } = state;
-      const selected = selector.hasNextCursor(state);
-      expect(selected).toEqual(hasNext);
+      const { meta: { hasNextPage } } = state;
+      const selected = selector.hasNextPage(state);
+      expect(selected).toEqual(hasNextPage);
     });
   });
 });

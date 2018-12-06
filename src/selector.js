@@ -103,4 +103,4 @@ export const getEndCursor = state => state.meta.endCursor;
  * @memberof Selectors
  * @param {Object} state Collection state.
  */
-export const hasNextCursor = state => state.meta.hasNext;
+export const hasNextPage = state => state.meta.hasNextPage;
