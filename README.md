@@ -112,9 +112,11 @@ Here's an example store that works with `@foundcareers/redux-entity`.
         -   [Parameters](#parameters-17)
     -   [getEndCursor](#getendcursor)
         -   [Parameters](#parameters-18)
+    -   [hasNextCursor](#hasnextcursor)
+        -   [Parameters](#parameters-19)
 -   [Factories](#factories)
     -   [createCollectionState](#createcollectionstate)
-        -   [Parameters](#parameters-19)
+        -   [Parameters](#parameters-20)
         -   [Examples](#examples-4)
 
 ## Actions
@@ -402,6 +404,14 @@ Get start cursor from a collection meta.
 ### getEndCursor
 
 Get end cursor from a collection state.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+
+### hasNextCursor
+
+Get hasNext within cursor meta from a collection state.
 
 #### Parameters
 
