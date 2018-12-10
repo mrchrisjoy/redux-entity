@@ -4,3 +4,4 @@ src/**/*.test.js
 cc-test-reporter
 coverage
 yarn.lock
+.eslintrc.js

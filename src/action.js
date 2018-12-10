@@ -1,6 +1,10 @@
 /** @module Actions */
 import { camelToMacroCase, camelToTitleCase } from './utils';
 
+/**
+ * Default actions configuration array.
+ * @private
+ */
 const defaultConfig = [
   'addEntity',
   'addEntities',
@@ -13,17 +17,20 @@ const defaultConfig = [
 ];
 
 /**
- * Creates an action types object using FC's action type namespace convention
+ * Creates an action types object using the title case namespacing convention.
  * (eg. '[Collection] Action').
  * @memberof Actions
  * @param {string} namespace Action types namespace in camelCase.
  * @param {string[]} config Array of strings containing actions in camelCase.
  * @private
  */
-const createTypes = (namespace, config) => config.reduce((accumulator, action) => ({
-  [camelToMacroCase(action)]: `[${camelToTitleCase(namespace)}] ${camelToTitleCase(action)}`,
-  ...accumulator,
-}), {});
+const createTypes = (namespace, config) => {
+  const typePrefix = `[${camelToTitleCase(namespace)}]`;
+  return config.reduce((accumulator, action) => ({
+    [camelToMacroCase(action)]: `${typePrefix} ${camelToTitleCase(action)}`,
+    ...accumulator,
+  }), {});
+};
 
 /**
  * Creates an object containing action creator functions.
