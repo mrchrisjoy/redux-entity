@@ -61,7 +61,7 @@ describe('selector.js', () => {
   });
 
   describe('getNextPage', () => {
-    it('should select next page', () => {
+    it('should select next page from meta', () => {
       const state = Object.assign({}, initialState);
       const { meta: { nextPage } } = state;
       const selected = selector.getNextPage(state);
@@ -70,11 +70,38 @@ describe('selector.js', () => {
   });
 
   describe('getPrevPage', () => {
-    it('should select previous page', () => {
+    it('should select previous page from meta', () => {
       const state = Object.assign({}, initialState);
       const { meta: { prevPage } } = state;
       const selected = selector.getPrevPage(state);
       expect(selected).toEqual(prevPage);
+    });
+  });
+
+  describe('getStartCursor', () => {
+    it('should select start cursor from cursor meta', () => {
+      const state = createCollectionState({}, { useCursor: true });
+      const { meta: { startCursor } } = state;
+      const selected = selector.getStartCursor(state);
+      expect(selected).toEqual(startCursor);
+    });
+  });
+
+  describe('getEndCursor', () => {
+    it('should select previous page from cursor meta', () => {
+      const state = createCollectionState({}, { useCursor: true });
+      const { meta: { endCursor } } = state;
+      const selected = selector.getEndCursor(state);
+      expect(selected).toEqual(endCursor);
+    });
+  });
+
+  describe('hasNextCursor', () => {
+    it('should select has next from cursor meta', () => {
+      const state = createCollectionState({}, { useCursor: true });
+      const { meta: { hasNextPage } } = state;
+      const selected = selector.hasNextPage(state);
+      expect(selected).toEqual(hasNextPage);
     });
   });
 });
