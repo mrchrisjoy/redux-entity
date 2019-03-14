@@ -74,48 +74,48 @@ Here's an example store that works with `@foundcareers/redux-entity`.
     -   [createActions](#createactions)
         -   [Parameters](#parameters-1)
         -   [Examples](#examples-1)
--   [Reducers](#reducers)
-    -   [addEntity](#addentity)
-        -   [Parameters](#parameters-2)
-    -   [addEntities](#addentities)
-        -   [Parameters](#parameters-3)
-    -   [removeEntity](#removeentity)
-        -   [Parameters](#parameters-4)
-    -   [removeEntities](#removeentities)
-        -   [Parameters](#parameters-5)
-    -   [removeSelectedEntity](#removeselectedentity)
-        -   [Parameters](#parameters-6)
-    -   [addMeta](#addmeta)
-        -   [Parameters](#parameters-7)
-    -   [select](#select)
-        -   [Parameters](#parameters-8)
-    -   [reset](#reset)
-        -   [Parameters](#parameters-9)
-    -   [createReducer](#createreducer)
-        -   [Parameters](#parameters-10)
-        -   [Examples](#examples-2)
 -   [Selectors](#selectors)
     -   [getEntities](#getentities)
-        -   [Parameters](#parameters-11)
+        -   [Parameters](#parameters-2)
     -   [getEntitiesArray](#getentitiesarray)
-        -   [Parameters](#parameters-12)
-        -   [Examples](#examples-3)
+        -   [Parameters](#parameters-3)
+        -   [Examples](#examples-2)
     -   [getSelectedEntityId](#getselectedentityid)
-        -   [Parameters](#parameters-13)
+        -   [Parameters](#parameters-4)
     -   [getMeta](#getmeta)
-        -   [Parameters](#parameters-14)
+        -   [Parameters](#parameters-5)
     -   [getNextPage](#getnextpage)
-        -   [Parameters](#parameters-15)
+        -   [Parameters](#parameters-6)
     -   [getPrevPage](#getprevpage)
-        -   [Parameters](#parameters-16)
+        -   [Parameters](#parameters-7)
     -   [getStartCursor](#getstartcursor)
-        -   [Parameters](#parameters-17)
+        -   [Parameters](#parameters-8)
     -   [getEndCursor](#getendcursor)
-        -   [Parameters](#parameters-18)
+        -   [Parameters](#parameters-9)
     -   [hasNextPage](#hasnextpage)
-        -   [Parameters](#parameters-19)
+        -   [Parameters](#parameters-10)
 -   [Factories](#factories)
     -   [createCollectionState](#createcollectionstate)
+        -   [Parameters](#parameters-11)
+        -   [Examples](#examples-3)
+-   [Reducers](#reducers)
+    -   [addEntity](#addentity)
+        -   [Parameters](#parameters-12)
+    -   [addEntities](#addentities)
+        -   [Parameters](#parameters-13)
+    -   [removeEntity](#removeentity)
+        -   [Parameters](#parameters-14)
+    -   [removeEntities](#removeentities)
+        -   [Parameters](#parameters-15)
+    -   [removeSelectedEntity](#removeselectedentity)
+        -   [Parameters](#parameters-16)
+    -   [addMeta](#addmeta)
+        -   [Parameters](#parameters-17)
+    -   [select](#select)
+        -   [Parameters](#parameters-18)
+    -   [reset](#reset)
+        -   [Parameters](#parameters-19)
+    -   [createReducer](#createreducer)
         -   [Parameters](#parameters-20)
         -   [Examples](#examples-4)
 
@@ -181,122 +181,6 @@ const { types, creators } = createActions('collection',
  removeEntity: payload => ({ type: '[Collection] Remove Entity', payload }),
  addEntity: payload => ({ type: '[Collection] Add Entity', payload })
 }
-```
-
-## Reducers
-
-### addEntity
-
-Add an entity to the collection state.
-
-#### Parameters
-
--   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The entity object you'd like to add. Must contain an `id` attribute.
-
-### addEntities
-
-Adds entities to the collection state.
-
-#### Parameters
-
--   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing entities you'd like to add to the collection.
-
-### removeEntity
-
-Remove an entity from the collection state.
-
-#### Parameters
-
--   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `id` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Id of entity you'd like to remove from the collection state.
-
-### removeEntities
-
-Removes entities from the collection state.
-
-#### Parameters
-
--   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `ids` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** An array of entity ids.
-
-### removeSelectedEntity
-
-Remove the selected entity.
-
-#### Parameters
-
--   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
-
-### addMeta
-
-Add a meta object to the collection state.
-
-#### Parameters
-
--   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The meta object.
-
-### select
-
-Select an entity in the collection state.
-
-#### Parameters
-
--   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `selectedEntityId` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Entity Id that's being selected.
-
-### reset
-
-Reset the collection state.
-
-#### Parameters
-
--   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Current Collection state.
--   `initialState` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Initial Collection state (refer to `createCollectionState`).
-
-### createReducer
-
-Creates an returns a custom reducer function.
-
-#### Parameters
-
--   `initialState` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
--   `actionTypes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing required action types.
--   `handlers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing custom reducer action creators. (optional, default `{}`)
-
-#### Examples
-
-```javascript
-// job.actions.js
-export default {
- ADD_ENTITY: '[Job] Add Entity',
- REMOVE_ENTITY: '[Job] Remove Entity',
- CUSTOM: '[Job] Custom'
- ...
-}
-
-// job.reducer.js
-import { createReducer, createCollectionState } from '@foundcareers/redux-entity';
-import jobActionTypes from './job.action';
-
-// Creating a reducer for a collection of entities (default case)
-export const reducer = createReducer(
- createCollectionState(),
- jobActionTypes
-);
-
-// Creating a reducer for a collection of entities (*customized case)
-export const reducer = createReducer(
- createCollectionState(),
- jobActionTypes,
- {
-   [jobActionTypes.CUSTOM]: (state, payload) => ({
-     ...state, custom: payload
-   })
- }
-);
 ```
 
 ## Selectors
@@ -449,4 +333,120 @@ const stateWithMetaPagination = createCollectionState({}, {
  },
  selectedEntityId: null,
 }
+```
+
+## Reducers
+
+### addEntity
+
+Add an entity to the collection state.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+-   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The entity object you'd like to add. Must contain an `id` attribute.
+
+### addEntities
+
+Adds entities to the collection state.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+-   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing entities you'd like to add to the collection.
+
+### removeEntity
+
+Remove an entity from the collection state.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+-   `id` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Id of entity you'd like to remove from the collection state.
+
+### removeEntities
+
+Removes entities from the collection state.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+-   `ids` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** An array of entity ids.
+
+### removeSelectedEntity
+
+Remove the selected entity.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+
+### addMeta
+
+Add a meta object to the collection state.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+-   `payload` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The meta object.
+
+### select
+
+Select an entity in the collection state.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+-   `selectedEntityId` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Entity Id that's being selected.
+
+### reset
+
+Reset the collection state.
+
+#### Parameters
+
+-   `state` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Current Collection state.
+-   `initialState` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Initial Collection state (refer to `createCollectionState`).
+
+### createReducer
+
+Creates an returns a custom reducer function.
+
+#### Parameters
+
+-   `initialState` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Collection state.
+-   `actionTypes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing required action types.
+-   `handlers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object containing custom reducer action creators. (optional, default `{}`)
+
+#### Examples
+
+```javascript
+// job.actions.js
+export default {
+ ADD_ENTITY: '[Job] Add Entity',
+ REMOVE_ENTITY: '[Job] Remove Entity',
+ CUSTOM: '[Job] Custom'
+ ...
+}
+
+// job.reducer.js
+import { createReducer, createCollectionState } from '@foundcareers/redux-entity';
+import jobActionTypes from './job.action';
+
+// Creating a reducer for a collection of entities (default case)
+export const reducer = createReducer(
+ createCollectionState(),
+ jobActionTypes
+);
+
+// Creating a reducer for a collection of entities (*customized case)
+export const reducer = createReducer(
+ createCollectionState(),
+ jobActionTypes,
+ {
+   [jobActionTypes.CUSTOM]: (state, payload) => ({
+     ...state, custom: payload
+   })
+ }
+);
 ```
