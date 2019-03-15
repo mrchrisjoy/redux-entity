@@ -1,5 +1,4 @@
 /** @module Reducers */
-import { filterMacroCaseKeys } from './utils';
 
 /**
  * Add an entity to the collection state.
@@ -8,7 +7,11 @@ import { filterMacroCaseKeys } from './utils';
  * @param {Object} payload The entity object you'd like to add. Must contain an `id` attribute.
  */
 export const addEntity = (state, payload) => ({
-  ...state, entities: { ...state.entities, [payload.id]: payload },
+  ...state,
+  entities: {
+    ...state.entities,
+    [payload.id]: { ...state.entities[payload.id], ...payload },
+  },
 });
 
 /**
@@ -68,7 +71,7 @@ export const addMeta = (state, payload) => ({
  * Select an entity in the collection state.
  * @memberof Reducers
  * @param {Object} state Collection state.
- * @param {Object} selectedEntityId Entity Id that's being selected.
+ * @param {string} selectedEntityId Entity Id that's being selected.
  */
 export const select = (state, selectedEntityId) => ({
   ...state, selectedEntityId,
@@ -145,7 +148,7 @@ export const createReducer = (
   handlers = {},
 ) => (state = initialState, action) => {
   const { type, payload } = action;
-  const reducer = selectReducer(filterMacroCaseKeys(actionTypes), type);
+  const reducer = selectReducer(actionTypes, type);
   return (reducer && reducer(state, payload)) || (
     Object.prototype.hasOwnProperty.call(handlers, type)
       ? handlers[type](state, action) : state
