@@ -44,6 +44,26 @@ describe('reducer.js', () => {
       expect(Object.keys(prevState.entities).length).toEqual(0);
       expect(Object.keys(finalState.entities).length).toEqual(1);
     });
+
+    it('should merge existing entity when adding', () => {
+      const payload = { id: '6', newAttribute: true };
+      const prevState = createCollectionState({
+        entities: {
+          6: {
+            id: '6',
+            oldAttribute: true,
+          },
+        },
+      });
+      const finalState = reducer.addEntity(prevState, payload);
+      expect(finalState.entities).toEqual({
+        6: {
+          id: '6',
+          oldAttribute: true,
+          newAttribute: true,
+        },
+      });
+    });
   });
 
   describe('addEntities', () => {
