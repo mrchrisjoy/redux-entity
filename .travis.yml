@@ -6,11 +6,6 @@ env:
 language: node_js
 dist: trusty
 
-cache:
-  directories:
-    - ~/.npm
-    - node_modules
-
 notifications:
   email: false
 
