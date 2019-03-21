@@ -274,5 +274,21 @@ describe('reducer.js', () => {
         payload: 'test',
       })).toMatchObject(initialState);
     });
+
+    it('should prioritise custom actions before default actions', () => {
+      const { types } = createActions('collection', ['select']);
+      const reducerFunction = reducer.createReducer(initialState, {
+        type: types.SELECT,
+        payload: 'test',
+      }, {
+        [types.SELECT]: state => ({
+          ...state, selectedEntityId: 'override',
+        }),
+      });
+      expect(reducerFunction(initialState, { type: types.SELECT, payload: 'something' })).toMatchObject({
+        ...initialState,
+        selectedEntityId: 'override',
+      });
+    });
   });
 });
