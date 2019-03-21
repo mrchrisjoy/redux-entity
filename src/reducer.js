@@ -149,8 +149,8 @@ export const createReducer = (
 ) => (state = initialState, action) => {
   const { type, payload } = action;
   const reducer = selectReducer(actionTypes, type);
-  return (reducer && reducer(state, payload)) || (
+  return (
     Object.prototype.hasOwnProperty.call(handlers, type)
-      ? handlers[type](state, action) : state
-  );
+    && handlers[type](state, action)
+  ) || (reducer ? reducer(state, payload) : state);
 };
