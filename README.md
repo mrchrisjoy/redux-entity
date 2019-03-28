@@ -1,7 +1,7 @@
 # @foundcareers/redux-entity
 [![build status](https://img.shields.io/npm/v/@foundcareers/redux-entity.svg)](https://www.npmjs.com/package/@foundcareers/redux-entity) [![build status](https://img.shields.io/travis/com/foundcareers/redux-entity.svg)](https://travis-ci.com/foundcareers/redux-entity) [![npm downloads](https://img.shields.io/npm/dt/@foundcareers/redux-entity.svg)](https://www.npmjs.com/package/@foundcareers/redux-entity) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-`redux-entity` is a minimal javascript library which aims to normalise the way you manage entities in your redux store. It mainly comprises of helper functions that'll help reduce a lot of redundant `action` and `reducer` code.
+`redux-entity` is a tiny javascript library which aims to normalise the way you manage entities in a redux store. It mainly comprises of helper functions that'll help reduce a lot of redundant `action` and `reducer` code.
 
 ## Installation
 
